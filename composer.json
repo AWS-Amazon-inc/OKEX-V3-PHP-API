@@ -1,7 +1,7 @@
 {
     "name": "bigxia/ok-v3",
     "description": "This is an api sdk about OKEx V3",
-    "type": "composer-plugin",
+    "type": "library",
     "license": "MIT",
     "authors": [
         {
