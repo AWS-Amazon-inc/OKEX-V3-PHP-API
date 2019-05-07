@@ -6,7 +6,11 @@
  * @api  https://www.okex.com/docs/zh/#futures-README
  * @authour luochao@iponycar.com
  */
-require 'Utils.php';
+
+
+namespace FuturesApi;
+
+use Utils;
 
 class FuturesApi extends Utils {
 
