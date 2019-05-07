@@ -32,6 +32,7 @@ class SpotApi extends Utils {
      */
     public function __construct()
     {
+//        $this->
     }
 
     // 币币账户信息
