@@ -6,7 +6,8 @@
  * @api  https://www.okex.com/docs/zh/#futures-README
  * @authour luochao@iponycar.com
  */
-require 'Utils.php';
+
+namespace okv3;
 
 class SpotApi extends Utils {
 

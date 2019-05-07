@@ -1,5 +1,6 @@
 <?php
 
+namespace okv3;
 
 class Utils
 {

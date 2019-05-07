@@ -8,9 +8,7 @@
  */
 
 
-namespace FuturesApi;
-
-use Utils;
+namespace okv3;
 
 class FuturesApi extends Utils {
 
