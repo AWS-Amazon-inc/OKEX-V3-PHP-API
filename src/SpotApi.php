@@ -27,14 +27,6 @@ class SpotApi extends Utils {
     const SPOT_DEAL = '/api/spot/v3/products/';
     const SPOT_KLINE = '/api/spot/v3/products/';
 
-    /**
-     * FuturesApi constructor.
-     */
-    public function __construct()
-    {
-
-    }
-
     // 币币账户信息
     public function getAccountInfo()
     {

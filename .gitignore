@@ -3,3 +3,4 @@
 .gitignore
 composer.lock
 .datacheck.json
+/src/Config.php

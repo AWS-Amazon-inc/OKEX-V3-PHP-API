@@ -21,12 +21,6 @@ $callback type: function 回调函数，当获得数据时会调用
 
 class Websocket extends Utils{
 
-    function __construct($configs)
-    {
-        // 设置参数
-        self::setParams($configs);
-    }
-
     function subscribe($callback, $sub_str="swap/ticker:BTC-USD-SWAP") {
         $GLOBALS['sub_str'] = $sub_str;
         $GLOBALS['callback'] = $callback;

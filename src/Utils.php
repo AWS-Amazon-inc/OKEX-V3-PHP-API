@@ -11,6 +11,12 @@ class Utils
     const FUTURE_API_URL = 'https://www.okex.com';
     const SERVER_TIMESTAMP_URL = '/api/general/v3/time';
 
+    public function __construct($configs)
+    {
+        // 设置参数
+        self::setParams($configs);
+    }
+
     public  static  function request($requestPath, $params, $method, $cursor = false)
     {
         if (strtoupper($method) == 'GET') {

@@ -11,6 +11,7 @@ require './vendor/autoload.php';
 use okv3\Config;
 use okv3\FuturesApi;
 use okv3\SpotApi;
+use okv3\SwapApi;
 use Workerman\Connection\AsyncTcpConnection;
 use Workerman\Worker;
 
@@ -19,10 +20,14 @@ use Workerman\Worker;
 // 交割合约-Ticker
 $obj = new FuturesApi(Config::$config);
 //$res = $obj->getSpecificTicker("EOS-USD-190628");
-$res = $obj->getCoinAccounts("eos");
+//$res = $obj->getCoinAccounts("eos");
+
+// 永续合约-Ticker
+$obj = new SwapApi(Config::$config);
+$res = $obj->getSpecificTicker("EOS-USD-SWAP");
 
 // 币币交易-Ticker
-//$obj = new SpotApi();
+$obj = new SpotApi(Config::$config);
 //$res = $obj->getSpecificTicker("EOS-USDT");
 
 //var_dump($res);
