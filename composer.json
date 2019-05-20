@@ -10,8 +10,7 @@
         }
     ],
     "require": {
-        "workerman/workerman": "^3.5",
-      "ext-pthreads": "*"
+        "workerman/workerman": "^3.5"
     },
 
     "autoload": {
