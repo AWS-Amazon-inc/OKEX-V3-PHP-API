@@ -9,5 +9,18 @@
             "email": "ai747957633@qq.com"
         }
     ],
-    "require": {}
+    "require": {
+        "workerman/workerman": "^3.5",
+      "ext-pthreads": "*"
+    },
+
+    "autoload": {
+        "psr-4": {
+            "okv3\\" : "src"
+        },
+
+        "files": [
+            "src/Websocket.php"
+        ]
+    }
 }

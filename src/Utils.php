@@ -4,9 +4,9 @@ namespace okv3;
 
 class Utils
 {
-    const apiKey = '';
-    const apiSecret = '';
-    const passphrase = '';
+    static $apiKey = '';
+    static $apiSecret = '';
+    static $passphrase = '';
 
     const FUTURE_API_URL = 'https://www.okex.com';
     const SERVER_TIMESTAMP_URL = '/api/general/v3/time';
@@ -22,8 +22,8 @@ class Utils
         $body = $params ? json_encode($params, JSON_UNESCAPED_SLASHES) : '';
         $timestamp = self::getServerTimestamp();
 
-        $sign = self::signature($timestamp, $method, $requestPath, $body, self::apiSecret);
-        $headers = self::getHeader(self::apiKey, $sign, $timestamp, self::passphrase);
+        $sign = self::signature($timestamp, $method, $requestPath, $body, self::$apiSecret);
+        $headers = self::getHeader(self::$apiKey, $sign, $timestamp, self::$passphrase);
 
         $ch= curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -79,4 +79,22 @@ class Utils
         return base64_encode(hash_hmac('sha256', $message, $secretKey, true));
     }
 
+    /*
+     * microsecond 微秒     millisecond 毫秒
+     *返回时间戳的毫秒数部分
+     */
+    public static function get_millisecond()
+    {
+        $time = microtime(true);
+        $msec=round($time*1000);
+
+        return $msec/1000;
+    }
+
+    // 设置密钥相关参数
+    public static function setParams($configs){
+        self::$apiKey=$configs["apiKey"];
+        self::$apiSecret=$configs["apiSecret"];
+        self::$passphrase=$configs["passphrase"];
+    }
 }

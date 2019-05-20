@@ -32,7 +32,7 @@ class SpotApi extends Utils {
      */
     public function __construct()
     {
-//        $this->
+
     }
 
     // 币币账户信息
@@ -178,10 +178,3 @@ class SpotApi extends Utils {
     }
 
 }
-
-
-// test
-$spot = new SpotApi();
-$ret =$spot->getTicker();
-
-var_dump($ret);

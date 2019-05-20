@@ -46,9 +46,14 @@ class FuturesApi extends Utils {
 
     /**
      * FuturesApi constructor.
+     * @param $apiKey
+     * @param $apiSecret
+     * @param $passphrase
      */
-    public function __construct()
+    public function __construct($configs)
     {
+        // 设置参数
+        self::setParams($configs);
     }
 
     // 获取合约账户所有的持仓信息
@@ -275,9 +280,3 @@ class FuturesApi extends Utils {
     }
 
 }
-
-// test
-$futures = new FuturesApi();
-$ret =$futures->setLeverage( 'btc', 'BTC-USD-180213', 1);
-
-var_dump($ret);

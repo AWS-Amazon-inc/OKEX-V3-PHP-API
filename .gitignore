@@ -1,3 +1,5 @@
 /vendor/
 .idea
 .gitignore
+composer.lock
+.datacheck.json
