@@ -97,7 +97,7 @@ class SwapApi extends Utils {
     }
 
     // 下单
-    public function takeOrder($client_oid, $instrument_id, $otype, $price, $size, $match_price, $leverage)
+    public function takeOrder($client_oid, $instrument_id, $otype, $price, $size, $match_price, $leverage, $order_type)
     {
         $params = [
             'client_oid' => $client_oid,
@@ -106,7 +106,8 @@ class SwapApi extends Utils {
             'price' => $price,
             'size' => $size,
             'match_price' => $match_price,
-            'leverage' => $leverage
+            'leverage' => $leverage,
+            'order_type' => $order_type
         ];
 
         return $this->request(self::SWAP_ORDER, $params, 'POST');
