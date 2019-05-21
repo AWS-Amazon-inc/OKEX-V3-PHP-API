@@ -25,7 +25,7 @@ $callback = function ($data){
  */
 //$obj->subscribe($callback,"spot/ticker:EOS-USDT");
 //$obj->subscribe($callback,"spot/candle60s:EOS-USDT");
-$obj->subscribe($callback,"spot/depth:EOS-USDT");
+$obj->subscribe($callback,"spot/depth:XRP-BTC");
 //$obj->subscribe($callback,"spot/depth5:EOS-USDT");
 //$obj->subscribe($callback,"spot/account:EOS");
 //$obj->subscribe($callback,"spot/order:EOS-USDT");

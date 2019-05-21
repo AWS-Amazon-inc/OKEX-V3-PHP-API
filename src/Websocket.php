@@ -75,9 +75,10 @@ class Websocket extends Utils{
                 }
             };
 
-            $con->onClose = function () use ($con) {
+            $con->onClose = function ($con) {
                 print_r("reconnecting\n");
-                $con->connect();
+                $con->reConnect(0);
+
             };
 
             $con->connect();
