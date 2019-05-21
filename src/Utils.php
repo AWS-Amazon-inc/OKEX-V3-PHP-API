@@ -26,7 +26,7 @@ class Utils
 
         $url = self::FUTURE_API_URL.$requestPath;
         $body = $params ? json_encode($params, JSON_UNESCAPED_SLASHES) : '';
-        $timestamp = self::getServerTimestamp();
+        $timestamp = self::getTimestamp();
 
         $sign = self::signature($timestamp, $method, $requestPath, $body, self::$apiSecret);
         $headers = self::getHeader(self::$apiKey, $sign, $timestamp, self::$passphrase);

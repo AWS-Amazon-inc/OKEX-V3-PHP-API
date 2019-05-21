@@ -20,8 +20,8 @@ use Workerman\Worker;
 // 交割合约-Ticker
 $obj = new FuturesApi(Config::$config);
 //$res = $obj->getKline("EOS-USD-190628","60");
-$res = $obj->getTicker("EOS-USD-190628");
-//$res = $obj->getCoinAccounts("eos");
+//$res = $obj->getTicker("EOS-USD-190628");
+$res = $obj->getCoinAccounts("eos");
 
 // 永续合约-Ticker
 $obj = new SwapApi(Config::$config);
