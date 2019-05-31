@@ -17,7 +17,7 @@ class SwapApi extends Utils {
     const SWAP_SPECIFIC_POSITION = '/api/swap/v3/';
     const SWAP_ACCOUNTS = '/api/swap/v3/accounts';
     const SWAP_COIN_ACCOUNT = '/api/swap/v3/accounts/';
-    const SWAP_GET_LEVERAGE = '/api/swap/v3/accounts/';
+    const SWAP_GET_LEVERAGE = '/api/swap/v3/';
     const SWAP_SET_LEVERAGE = '/api/swap/v3/accounts/';
     const SWAP_LEDGER = '/api/swap/v3/accounts/';
     const SWAP_DELETE_POSITION = '/api/swap/v3/cloFse_all_orders';
@@ -64,9 +64,13 @@ class SwapApi extends Utils {
     }
 
     // 单个币种合约账户信息
-    public function getCoinAccounts($symbol)
+    public function getCoinAccounts($instrument_id)
     {
-        return $this->request(self::SWAP_COIN_ACCOUNT.$symbol, [], 'GET');
+//        return $this->request(self::SWAP_COIN_ACCOUNT.$symbol, [], 'GET');
+
+        return $this->request(self::SWAP_GET_LEVERAGE.$instrument_id.'/accounts', [], 'GET');
+
+
     }
 
     // 获取合约账户币种杠杆倍数
