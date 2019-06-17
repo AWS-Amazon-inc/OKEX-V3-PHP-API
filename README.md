@@ -32,9 +32,7 @@
     
     https://www.okex.com/docs/zh/#README
    
-2、本项目会尽可能长期维护，接受捐赠
-
-3、如果有改进意见，欢迎提issue，欢迎提交代码
+2、如果有改进意见，欢迎提issue，欢迎提交代码
 
     
     
