@@ -31,7 +31,7 @@ $callback = function ($data){
 //$obj->subscribe($callback,"spot/depth5:EOS-USDT");
 //$obj->subscribe($callback,"spot/trade:ETH-USDT");
 //$obj->subscribe($callback,"spot/account:EOS");
-$obj->subscribe($callback,"spot/order:EOS-USDT");
+//$obj->subscribe($callback,"spot/order:EOS-USDT");
 
 //$obj->subscribe($callback,["spot/order:EOS-USDT","spot/ticker:EOS-USDT"]);
 
@@ -64,7 +64,7 @@ $coin = "EOS";
  */
 $instrumentId= "EOS-USD-SWAP";
 $coin = "EOS";
-//$obj->subscribe($callback,"swap/ticker:$instrumentId");
+$obj->subscribe($callback,"swap/ticker:$instrumentId");
 //$obj->subscribe($callback,"swap/candle60s:$instrumentId");
 //$obj->subscribe($callback,"swap/depth:$instrumentId");
 //$obj->subscribe($callback,"swap/depth5:$instrumentId");

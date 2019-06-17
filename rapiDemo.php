@@ -26,8 +26,8 @@ $obj = new FuturesApi(Config::$config);
 
 // 永续合约-Ticker
 $obj = new SwapApi(Config::$config);
-//$res = $obj->getSpecificTicker("EOS-USD-SWAP");
-$res = $obj->getCoinAccounts("EOS-USD-SWAP");
+$res = $obj->getSpecificTicker("EOS-USD-SWAP");
+//$res = $obj->getCoinAccounts("EOS-USD-SWAP");
 
 // 币币交易-Ticker
 $obj = new SpotApi(Config::$config);
