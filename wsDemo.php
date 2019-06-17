@@ -10,6 +10,8 @@
 
 require './vendor/autoload.php';
 
+require './Config.php';
+
 use okv3\Config;
 use okv3\Websocket;
 

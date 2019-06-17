@@ -8,13 +8,14 @@
 
 require './vendor/autoload.php';
 
+require './Config.php';
+
 use okv3\Config;
 use okv3\FuturesApi;
 use okv3\SpotApi;
 use okv3\SwapApi;
 use Workerman\Connection\AsyncTcpConnection;
 use Workerman\Worker;
-
 
 
 // 交割合约-Ticker
