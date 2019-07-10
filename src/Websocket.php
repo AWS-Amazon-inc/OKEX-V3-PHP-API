@@ -21,6 +21,8 @@ $callback type: function 回调函数，当获得数据时会调用
 
 class Websocket extends Utils{
 
+    public $oldTime="";
+
     function subscribe($callback, $sub_str="swap/ticker:BTC-USD-SWAP") {
         $GLOBALS['sub_str'] = $sub_str;
         $GLOBALS['callback'] = $callback;
@@ -66,7 +68,10 @@ class Websocket extends Utils{
                     $data = json_encode([
                         'op' => "subscribe",
                         'args' => $GLOBALS['sub_str']
-                    ]);
+                    ], JSON_UNESCAPED_SLASHES);
+
+                    print_r($data);
+                    print_r("\n");
                     $con->send($data);
                 }
 
