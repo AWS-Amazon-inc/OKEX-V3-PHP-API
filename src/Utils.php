@@ -62,9 +62,20 @@ class Utils
         return $headers;
     }
 
+    // 获取IOS格式时间戳
     public static function getTimestamp()
     {
         return date("Y-m-d\TH:i:s"). substr((string)microtime(), 1, 4) . 'Z';
+    }
+
+    // IOS格式时间戳转毫秒级时间
+    function dateToTimestamp($isoTime)
+    {
+        @list($usec, $sec) = explode(".", $isoTime);
+        $date = strtotime($usec);
+        $return_data = str_pad($date.$sec,13,"0",STR_PAD_RIGHT); //不足13位。右边补0
+        return substr($return_data, 0, -1);
+
     }
 
     public static function getServerTimestamp(){

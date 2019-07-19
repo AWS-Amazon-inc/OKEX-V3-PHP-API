@@ -51,7 +51,11 @@ class Websocket extends Utils{
                     'args' => [self::$apiKey, self::$passphrase, $timestamp, $sign]
                 ]);
 
+                $ntime = $this->getTimestamp();
+                print_r($ntime." $data\n");
+//                    print_r($ntime." $i $data\n");
                 $con->send($data);
+
             };
 
             $con->onMessage = function($con, $data) {
@@ -70,8 +74,9 @@ class Websocket extends Utils{
                         'args' => $GLOBALS['sub_str']
                     ], JSON_UNESCAPED_SLASHES);
 
-                    print_r($data);
-                    print_r("\n");
+                    $ntime = $this->getTimestamp();
+                    print_r($ntime . " $data\n");
+
                     $con->send($data);
                 }
 
@@ -81,9 +86,12 @@ class Websocket extends Utils{
             };
 
             $con->onClose = function ($con) {
-                print_r("reconnecting\n");
-                $con->reConnect(0);
 
+                $ntime = $this->getTimestamp();
+
+                print_r($ntime." reconnecting\n");
+
+                $con->reConnect(0);
             };
 
             $con->connect();

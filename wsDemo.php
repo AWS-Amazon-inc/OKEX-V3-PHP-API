@@ -22,17 +22,33 @@ $callback = function ($data) use ($obj){
     $ntime = $obj->getTimestamp();
     $otime = $obj -> oldTime;
 
-    $diff = strtotime($ntime)-strtotime($otime);
-
-    print_r($obj->getTimestamp()." ($diff) ".$data);
+    print_r($ntime." ".$data);
     print_r("\n");
-    $obj -> oldTime = $ntime;
-
 };
 
-$depth200Callback = function ($data) use ($obj){
-    print_r(date("Y-m-d H:i:s ",time()).json_encode($data));
-    print_r("\n");
+$callbackTime = function ($data) use ($obj){
+
+    $ntime = $obj->getTimestamp();
+    $otime = $obj -> oldTime;
+
+    // 上次与本次推送时间差，
+    $lastDiff = $obj->dateToTimestamp($ntime)-$obj->dateToTimestamp($otime);
+//    print_r($ntime." ($diff) ".$data);
+//    print_r("\n");
+
+    // 本次，本地时间戳与推送数据时间戳的差
+    $dataArr = json_decode($data, true);
+    if (!empty($dataArr["data"][0]["timestamp"])){
+        $timestamp = $dataArr["data"][0]["timestamp"];
+        $diff = $obj->dateToTimestamp($ntime)-$obj->dateToTimestamp($timestamp);
+        print_r($ntime." ($lastDiff)"." ($diff) ".$data);
+        print_r("\n");
+    }else{
+        print_r($obj->getTimestamp()." ".$data);
+        print_r("\n");
+    }
+
+    $obj -> oldTime = $ntime;
 
 };
 
@@ -47,6 +63,7 @@ $instrumentId = "BTC-USDT";
 //$obj->subscribe($callback,"spot/trade:$instrumentId");
 //$obj->subscribe($callback);
 //$obj->subscribe($callback,"spot/order:$instrumentId");
+//$obj->subscribe($callback,"spot/account:EOS");
 
 //$obj->subscribe($callback,["spot/order:$instrumentId","spot/ticker:$instrumentId"]);
 
@@ -59,7 +76,7 @@ $instrumentId = "BTC-USDT";
  * futures
  */
 //$instrumentId= "TRX-USD-190927";
-$instrumentId= "BTC-USD-190719";
+$instrumentId= "BTC-USD-190927";
 //$instrumentId= "BTC-USD-190628";
 $coin = "EOS";
 //$obj->subscribe($callback,"futures/ticker:$instrumentId");
@@ -67,10 +84,10 @@ $coin = "EOS";
 //$obj->subscribe($callback,"futures/candle60s:$instrumentId");
 //$obj->subscribe($callback,"futures/candle900s:$instrumentId");
 //$obj->subscribe($callback,"futures/depth:$instrumentId");
-$obj->subscribe($callback,"futures/depth5:$instrumentId");
+$obj->subscribe($callbackTime,"futures/depth5:$instrumentId");
 //$obj->subscribe($callback,"futures/trade:$instrumentId");
 //$obj->subscribe($callback,"futures/account:$coin");
-//$obj->subscribe($callback,"futures/order:$instrumentId");
+//$obj->subscribe($callbackTime,"futures/order:$instrumentId");
 
 //$obj->subscribe($callback,"futures/position:$instrumentId");
 //$obj->subscribe($callback,"futures/estimated_price:$instrumentId");
