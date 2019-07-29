@@ -21,7 +21,19 @@ $callback type: function 回调函数，当获得数据时会调用
 
 class Websocket extends Utils{
 
+    // 上一次接收信息的时间，单个频道时用
     public $oldTime="";
+    // depth 200档的全量数据，包括合并的
+    public $partial=null;
+
+    public $checksumTest;
+
+    public function __construct($configs)
+    {
+        parent::__construct($configs);
+        $this->checksumTest=new ChecksumTest();
+    }
+
 
     function subscribe($callback, $sub_str="swap/ticker:BTC-USD-SWAP") {
         $GLOBALS['sub_str'] = $sub_str;
@@ -29,7 +41,7 @@ class Websocket extends Utils{
         $worker = new Worker();
         $worker->onWorkerStart = function($worker) {
             // ssl需要访问443端口
-            $con = new AsyncTcpConnection('ws://real.okex.com:10442/ws/v3');
+            $con = new AsyncTcpConnection('ws://real.okex.com:8443/ws/v3');
 
             // 设置以ssl加密方式访问，使之成为wss
             $con->transport = 'ssl';
@@ -38,14 +50,17 @@ class Websocket extends Utils{
             Timer::add(20, function() use ($con)
             {
                 $con->send("ping");
-//                print_r("hello world");
+
+                $ntime = $this->getTimestamp();
+                print_r($ntime." ping\n");
             });
 
             $con->onConnect = function($con) {
 
                 // 登陆
                 $timestamp = self::get_millisecond();
-                $sign = self::signature($timestamp,"GET","/users/self/verify","",self::$apiSecret);
+//                $timestamp = 1563541080.121;
+                $sign = self::wsSignature($timestamp,"GET","/users/self/verify","",self::$apiSecret);
                 $data = json_encode([
                     'op' => "login",
                     'args' => [self::$apiKey, self::$passphrase, $timestamp, $sign]
@@ -63,6 +78,31 @@ class Websocket extends Utils{
                 // 解压数据
                 $data = gzinflate($data);
 
+                // 如果是深度200档，则校验
+                if(strpos($data,"checksum"))
+                {
+                    if ($this->partial==null)
+                    {
+                        $this->partial=$data;
+                    }else{
+                        $update = $data;
+
+                        // 深度合并
+                        $data = $this->checksumTest->depthMerge($this->partial,$update);
+
+                        // 深度校验结果
+                        $result = $this->checksumTest->checksum($data);
+
+                        if (!$result){
+                            die(self::getTimestamp()." checksum fail\n");
+                        }
+
+                        // 更新全局的全量数据
+                        $this->partial = $data;
+                    }
+//                    print_r("深度\n") ;
+                }
+
                 call_user_func_array($GLOBALS['callback'], array($data));
 
                 $data = json_decode($data, true);
@@ -78,10 +118,6 @@ class Websocket extends Utils{
                     print_r($ntime . " $data\n");
 
                     $con->send($data);
-                }
-
-                if(isset($data['ping'])) {
-
                 }
             };
 

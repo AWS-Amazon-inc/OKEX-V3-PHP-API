@@ -96,6 +96,18 @@ class Utils
         return base64_encode(hash_hmac('sha256', $message, $secretKey, true));
     }
 
+    public static function wsSignature($timestamp, $method, $requestPath, $body, $secretKey)
+    {
+        $message = (string) $timestamp . strtoupper($method) . $requestPath . (string) $body;
+
+        $ntime = self::getTimestamp();
+        print_r($ntime." TEXT-TO-SIGN:$message\n");
+
+
+
+        return base64_encode(hash_hmac('sha256', $message, $secretKey, true));
+    }
+
     /*
      * microsecond 微秒     millisecond 毫秒
      *返回时间戳的毫秒数部分
