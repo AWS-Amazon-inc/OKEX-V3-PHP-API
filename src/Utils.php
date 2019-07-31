@@ -8,6 +8,8 @@ class Utils
     static $apiSecret = '';
     static $passphrase = '';
 
+    static $textToSign = '';
+
     const FUTURE_API_URL = 'https://www.okex.com';
     const SERVER_TIMESTAMP_URL = '/api/general/v3/time';
 
@@ -29,7 +31,7 @@ class Utils
         $timestamp = self::getTimestamp();
 
         $sign = self::signature($timestamp, $method, $requestPath, $body, self::$apiSecret);
-        $headers = self::getHeader(self::$apiKey, $sign, $timestamp, self::$passphrase);
+        $headers = self::getHeader(self::$apiKey, $sign, $timestamp, self::$passphrase, self::$textToSign);
 
         $ch= curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -42,14 +44,32 @@ class Utils
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER , false);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+        // 头信息
+//        curl_setopt($ch, CURLOPT_HEADER, true);
+//        curl_setopt($ch, CURLOPT_NOBODY,true);
+        curl_setopt($ch, CURLINFO_HEADER_OUT,true);
+
+
         $return = curl_exec($ch);
+
+
+        if(!curl_errno($ch))
+        {
+            $info = curl_getinfo($ch,CURLINFO_HEADER_OUT);
+            if (Config::$debug)
+            {
+                echo ($info);
+            }
+        }
+
 
         $return = json_decode($return,true);
 
         return $return;
     }
 
-    public static function getHeader($apiKey, $sign, $timestamp, $passphrase)
+    public static function getHeader($apiKey, $sign, $timestamp, $passphrase, $textToSign)
     {
         $headers = array();
 
@@ -58,6 +78,7 @@ class Utils
         $headers[] = "OK-ACCESS-SIGN: $sign";
         $headers[] = "OK-ACCESS-TIMESTAMP: $timestamp";
         $headers[] = "OK-ACCESS-PASSPHRASE: $passphrase";
+        $headers[] = "OK-TEXT-TO-SIGN: $textToSign";
 
         return $headers;
     }
@@ -92,6 +113,8 @@ class Utils
     public static function signature($timestamp, $method, $requestPath, $body, $secretKey)
     {
         $message = (string) $timestamp . strtoupper($method) . $requestPath . (string) $body;
+
+        self::$textToSign = $message;
 
         return base64_encode(hash_hmac('sha256', $message, $secretKey, true));
     }
