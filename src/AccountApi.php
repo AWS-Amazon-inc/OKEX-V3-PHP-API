@@ -24,9 +24,6 @@ class AccountApi extends Utils
     const ACCOUNT_COIN_DEPOSIT_HISTORY = '/api/account/v3/deposit/history/';
     const ACCOUNT_CURRENCIES = '/api/account/v3/currencies/';
     const ACCOUNT_WITHDRAWAL_FEE = '/api/account/v3/withdrawal/fee/';
-    const SPOT_SPECIFIC_TICKER = '/api/spot/v3/products/';
-    const SPOT_DEAL = '/api/spot/v3/products/';
-    const SPOT_KLINE = '/api/spot/v3/products/';
 
     // 资金账户信息，多个币种
     public function getWalletInfo()

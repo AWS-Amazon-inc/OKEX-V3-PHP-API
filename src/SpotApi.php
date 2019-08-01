@@ -40,62 +40,63 @@ class SpotApi extends Utils {
     }
 
     // 账单流水查询
-    public function getLedgerRecord($symbol, $limit = 1)
+    public function getLedgerRecord($symbol, $after='', $before='', $limit='', $type='')
     {
         $params = [];
-        if ($limit) {
-            $params['limit'] = $limit;
-            return  $this->request(self::SPOT_LEDGER_RECORD.$symbol.'ledger', $params, 'GET');
-        }
+
+        if ($after) $params['after'] = $after;
+        if ($before) $params['before'] = $after;
+        if ($limit) $params['limit'] = $limit;
+        if ($type) $params['type'] = $type;
+
+        return  $this->request(self::SPOT_LEDGER_RECORD.$symbol.'/ledger', $params, 'GET');
     }
 
     // 下单
-    public function takeOrder($otype, $side, $instrument_id, $size, $margin_trading=1, $client_oid='', $price='', $funds='', $notional = '')
+    public function takeOrder($instrument_id, $side, $size, $price='', $notional='', $client_oid='', $type='', $order_type='')
     {
         $params = [
-            'type' => $otype,
-            'side' => $side,
             'instrument_id' => $instrument_id,
-            'size' => $size,
-            'client_oid' => $client_oid,
-            'price' => $price,
-            'funds' => $funds,
-            'margin_trading' => $margin_trading,
-            'notional'  => $notional
+            'side' => $side,
+            'size' => $size
         ];
+
+        if ($price) $params['price'] = $price;
+        if ($notional) $params['notional'] = $notional;
+        if ($client_oid) $params['limit'] = $client_oid;
+        if ($type) $params['type'] = $type;
+        if ($order_type) $params['order_type'] = $order_type;
 
         return $this->request(self::SPOT_ORDER, $params, 'POST');
     }
 
     //撤销指定订单
-    public function cancelOrder($oid, $instrument_id, $client_oid)
+    public function cancelOrder($instrument_id, $order_id='', $client_oid='')
     {
         $params = [
             'instrument_id' => $instrument_id,
-            'client_oid'    => $client_oid
         ];
 
-       return $this->request(self::SPOT_CANCEL_ORDER.$oid, $params, 'POST');
+       return $this->request(self::SPOT_CANCEL_ORDER.$order_id, $params, 'POST');
     }
 
     // 获取订单列表
-    public function getOrdersList($status, $instrument_id, $froms='', $to='', $limit='100')
+    public function getOrdersList($instrument_id, $state, $after='', $before='', $limit='')
     {
         $params = [
-            'status' => $status,
             'instrument_id' => $instrument_id,
-            'limit' => $limit
+            'state' => $state,
         ];
 
-        if ($froms) $params['from'] = $froms;
-        if ($to) $params['to'] = $to;
-        if ($instrument_id) $params['instrument_id'] = $instrument_id;
+        if ($after) $params['after'] = $after;
+        if ($before) $params['before'] = $before;
+        if ($limit) $params['limit'] = $limit;
 
         return $this->request(self::SPOT_ORDERS_LIST, $params, 'GET', true);
     }
 
     // 获取订单信息
-    public function getOrderInfo($oid, $instrument_id)
+    public function getOrderInfo($instrument_id, $oid)
     {
         $params = ['instrument_id' => $instrument_id];
 
@@ -103,7 +104,7 @@ class SpotApi extends Utils {
     }
 
     // 获取成交明细
-    public function getFills($order_id, $instrument_id, $froms, $to, $limit='100')
+    public function getFills($instrument_id, $order_id, $froms='', $to='', $limit='')
     {
         $params = [
             'order_id' => $order_id,
@@ -146,7 +147,7 @@ class SpotApi extends Utils {
     }
 
     // 获取成交数据
-    public function getDeal($instrument_id, $froms, $to, $limit)
+    public function getDeal($instrument_id, $froms='', $to='', $limit='')
     {
         $params = [
             'from'=> $froms,
@@ -158,7 +159,7 @@ class SpotApi extends Utils {
     }
 
     // 获取K线
-    public function getKine($instrument_id, $start, $end, $granularity)
+    public function getKine($instrument_id, $granularity='',$start='', $end='')
     {
         $params = [
             'start' => $start,
