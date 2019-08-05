@@ -67,7 +67,7 @@ $instrumentId = "BTC-USDT";
 //$obj->subscribe($callbackTime,"spot/order:$instrumentId");
 //$obj->subscribe($callback,"spot/account:OKDK");
 
-$obj->subscribe($callbackTime,["spot/ticker:$instrumentId","spot/depth5:$instrumentId"]);
+//$obj->subscribe($callbackTime,["spot/ticker:$instrumentId","spot/depth5:$instrumentId"]);
 
 /**
  * margin
@@ -77,16 +77,20 @@ $obj->subscribe($callbackTime,["spot/ticker:$instrumentId","spot/depth5:$instrum
 /**
  * futures
  */
-$instrumentId= "EOS-USD-190927";
+//$instrumentId= "EOS-USD-190927";
+$instrumentId= "TRX-USD-190927";
+$instrumentId= "TRX-USD-190809";
+$instrumentId= "TRX-USD-190816";
 //$instrumentId= "BTC-USD-190802";
+//$instrumentId= "BTC-USD-190809";
 //$instrumentId= "BTC-USD-190628";
 $coin = "EOS";
 //$obj->subscribe($callbackTime,"futures/ticker:$instrumentId");
 //$obj->subscribe($callback,"futures/candle1800s:$instrumentId");
 //$obj->subscribe($callback,"futures/candle60s:$instrumentId");
 //$obj->subscribe($callback,"futures/candle900s:$instrumentId");
-//$obj->subscribe($callback,"futures/depth:$instrumentId");
-//$obj->subscribe($callbackTime,"futures/depth5:$instrumentId");
+//$obj->subscribe($callbackTime,"futures/depth:$instrumentId");
+$obj->subscribe($callbackTime,"futures/depth5:$instrumentId");
 //$obj->subscribe($callback,"futures/trade:$instrumentId");
 //$obj->subscribe($callback,"futures/account:$coin");
 //$obj->subscribe($callbackTime,"futures/order:$instrumentId");
@@ -99,13 +103,13 @@ $coin = "EOS";
 //$obj->subscribe($callback,"futures/instruments");
 
 //$obj->subscribe($callback,["futures/position:$instrumentId","futures/order:EOS-USD-190802"]);
-$obj->subscribe($callback,['futures/position:BTC-USD-190927', 'futures/position:LTC-USD-190927', 'futures/position:ETH-USD-190927', 'futures/position:ETC-USD-190927', 'futures/position:XRP-USD-190927', 'futures/position:EOS-USD-190927', 'futures/position:BCH-USD-190927', 'futures/position:BSV-USD-190927', 'futures/position:TRX-USD-190927']);
+//$obj->subscribe($callback,['futures/position:BTC-USD-190927', 'futures/position:LTC-USD-190927', 'futures/position:ETH-USD-190927', 'futures/position:ETC-USD-190927', 'futures/position:XRP-USD-190927', 'futures/position:EOS-USD-190927', 'futures/position:BCH-USD-190927', 'futures/position:BSV-USD-190927', 'futures/position:TRX-USD-190927']);
 
 
 /**
  * swap
  */
-$instrumentId= "TRX-USD-SWAP";
+$instrumentId= "BTC-USD-SWAP";
 $coin = "EOS";
 //$obj->subscribe($callback,"swap/ticker:$instrumentId");
 //$obj->subscribe($callback,"swap/candle60s:$instrumentId");

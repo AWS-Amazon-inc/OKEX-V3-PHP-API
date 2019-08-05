@@ -13,6 +13,7 @@ require './Config.php';
 use okv3\AccountApi;
 use okv3\Config;
 use okv3\FuturesApi;
+use okv3\MarginApi;
 use okv3\SpotApi;
 use okv3\SwapApi;
 use Workerman\Connection\AsyncTcpConnection;
@@ -68,7 +69,7 @@ $obj = new SpotApi(Config::$config);
 //$res = $obj -> getOrdersList($instrumentId,"2","","",1);
 // 获取订单信息
 //$res = $obj -> getOrderInfo($instrumentId,"3271189018971137");
-// 获取订单信息
+// 获取成交明细
 //$res = $obj -> getFills($instrumentId,"3230072570268672");
 // 获取币对信息
 //$res = $obj -> getCoinInfo();
@@ -82,6 +83,39 @@ $obj = new SpotApi(Config::$config);
 //$res = $obj -> getDeal($instrumentId);
 // 获取K线
 //$res = $obj -> getKine($instrumentId);
+
+// 币币杠杆账户信息
+$instrumentId = "EOS-USDT";
+$currency = "EOS";
+$obj = new MarginApi(Config::$config);
+//$res = $obj -> getAccountInfo();
+// 单一币种账户信息
+//$res = $obj -> getCoinAccountInfo($instrumentId);
+// 账单流水查询
+//$res = $obj -> getLedgerRecord($instrumentId);
+// 杠杆配置信息
+//$res = $obj -> getMarginConf();
+// 某个杠杆配置信息
+//$res = $obj -> getMarginSpecialConf($instrumentId);
+// 获取借币记录
+//$res = $obj -> getBorrowedRecord();
+// 某账户借币记录
+$res = $obj -> getSpecialBorrowedRecord($instrumentId,0);
+// 借币
+//$res = $obj -> borrowCoin($instrumentId, $currency, 0.1);
+// 还币
+//$res = $obj -> returnCoin($instrumentId, $currency, 0.1, "");
+// 下单
+//$res = $obj -> takeOrder($instrumentId,"sell","0.1","2","10");
+// 撤销指定订单
+//$res = $obj -> cancelOrder($instrumentId,"3292706588398592");
+// 获取订单列表
+//$res = $obj -> getOrdersList($instrumentId,"-1","","",1);
+// 获取订单信息
+//$res = $obj -> getOrderInfo($instrumentId,"3292706588398592");
+// 获取成交明细
+//$res = $obj -> getFills($instrumentId,"3292706588398592");
+
 
 // 交割合约-Ticker
 $instrumentId = "EOS-USD-190927";
