@@ -163,13 +163,13 @@ class MarginApi extends Utils {
     }
 
     // 获取成交明细
-    public function getFills($instrument_id, $order_id, $froms='', $to='', $limit='')
+    public function getFills($instrument_id, $order_id, $afters='', $before='', $limit='')
     {
         $params = [
             'order_id' => $order_id,
             'instrument_id' => $instrument_id,
-            'from' => $froms,
-            'to' => $to,
+            'after' => $afters,
+            'before' => $before,
             'limit' => $limit
         ];
 
