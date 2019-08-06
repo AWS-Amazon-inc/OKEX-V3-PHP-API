@@ -268,4 +268,11 @@ class FuturesApi extends Utils {
         return $this->request(self::HOLD_AMOUNT.$instrument_id.'/holds', [], 'GET');
     }
 
+    // 公共-获取合约标记价格
+    public function getMarkPrice($instrument_id)
+    {
+        return $this->request(self::FUTURE_MARK.$instrument_id.'/mark_price', [], 'GET');
+    }
+
+
 }

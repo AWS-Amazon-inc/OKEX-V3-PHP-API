@@ -166,19 +166,74 @@ $obj = new FuturesApi(Config::$config);
 //$res = $obj->getHolds($instrumentId);
 // 公共-获取当前限价
 //$res = $obj->getLimit($instrumentId);
+// 公共-获取合约标记价格
+//$res = $obj->getMarkPrice($instrumentId);
 // 公共-获取强平单
 //$res = $obj->getLiquidation($instrumentId,1);
 // 公共-获取合约挂单冻结数量
-$res = $obj->getHoldsAmount($instrumentId);
+//$res = $obj->getHoldsAmount($instrumentId);
 
 // 永续合约-Ticker
+$instrumentId = "EOS-USD-SWAP";
+$currency = "EOS";
 $obj = new SwapApi(Config::$config);
-//$res = $obj->getSpecificTicker("EOS-USD-SWAP");
-//$res = $obj->getCoinAccounts("EOS-USD-SWAP");
+// 合约持仓信息
+//$res = $obj->getPosition();
+// 单个合约持仓信息
+//$res = $obj->getSpecificPosition($instrumentId);
+// 所有币种合约账户信息
+//$res = $obj->getAccounts();
+// 单个币种合约账户信息
+//$res = $obj->getCoinAccounts($instrumentId);
+// 获取合约币种杠杆倍数
+//$res = $obj->getSettings($instrumentId);
+// 设定合约币种杠杆倍数
+//$res = $obj->setLeverage($instrumentId, 3,10);
+// 账单流水查询
+//$res = $obj->getLedger($instrumentId);
+// 下单
+//$res = $obj->takeOrder("abc",$instrumentId,"1","4.2", "1","0","10","");
+// 撤销指定订单
+//$res = $obj->revokeOrder($instrumentId,"294683725542936576");
+// 获取订单列表
+//$res = $obj->getOrderList(-1,$instrumentId);
+// 获取订单信息
+//$res = $obj->getOrderInfo("294683725542936576",$instrumentId);
+// 获取成交明细
+//$res = $obj->getFills("294683725542936576",$instrumentId);
+// 获取合约信息
+//$res = $obj->getProducts();
+// 获取深度
+//$res = $obj->getDepth($instrumentId,1);
+// 公共-获取全部ticker信息
+//$res = $obj->getTicker();
+// 公共-获取某个ticker信息
+//$res = $obj->getSpecificTicker($instrumentId);
+// 公共-获取成交数据
+//$res = $obj->getTrades($instrumentId);
+// 公共-获取K线数据
+//$res = $obj->getKline($instrumentId,"60");
+// 公共-获取指数信息
+//$res = $obj->getIndex($instrumentId);
+// 公共-获取法币汇率
+//$res = $obj->getRate();
+// 公共-获取平台总持仓量
+//$res = $obj->getHolds($instrumentId);
+// 公共-获取当前限价
+//$res = $obj->getLimit($instrumentId);
+// 公共-获取强平单
+//$res = $obj->getLiquidation($instrumentId,1);
+// 公共-获取合约挂单冻结数量
+//$res = $obj->getHoldsAmount($instrumentId);
+// 公共-获取合约下一次结算时间
+//$res = $obj->getFundingTime($instrumentId);
+// 公共-获取合约标记价格
+//$res = $obj->getMarkPrice($instrumentId);
+// 公共-获取合约标记价格
+//$res = $obj->getMarkPrice($instrumentId);
+// 公共-获取合约历史资金费率
+$res = $obj->getHistoricalFundingRate($instrumentId);
 
-// 币币交易-Ticker
-$obj = new SpotApi(Config::$config);
-//$res = $obj->getSpecificTicker("EOS-USDT");
 
 //var_dump($res);
 echo (json_encode($res, JSON_PRETTY_PRINT));
