@@ -25,7 +25,7 @@ class FuturesApi extends Utils {
     const FUTURE_ORDERS = '/api/futures/v3/orders';
     const FUTURE_REVOKE_ORDER = '/api/futures/v3/cancel_order/';
     const FUTURE_REVOKE_ORDERS = '/api/futures/v3/cancel_batch_orders/';
-    const FUTURE_ORDERS_LIST = '/api/margin/v3/orders';
+    const FUTURE_ORDERS_LIST = '/api/futures/v3/orders';
     const FUTURE_ORDER_INFO = '/api/futures/v3/orders/';
     const FUTURE_FILLS = '/api/futures/v3/fills';
     const FUTURE_PRODUCTS_INFO = '/api/futures/v3/instruments';
@@ -75,7 +75,7 @@ class FuturesApi extends Utils {
     }
 
     // 设定合约币种杠杆倍数
-    public function setLeverage($symbol, $instrument_id='', $direction='', $leverage=10)
+    public function setLeverage($symbol, $leverage, $instrument_id='', $direction='')
     {
         $params = [
             'instrument_id' =>  $instrument_id,
@@ -96,18 +96,19 @@ class FuturesApi extends Utils {
     }
 
     // 下单
-    public function takeOrder($client_oid, $instrument_id, $otype, $price, $size, $match_price, $leverage, $order_type)
+    public function takeOrder($client_oid='', $instrument_id, $otype, $price, $size, $match_price='', $leverage, $order_type='')
     {
         $params = [
-            'client_oid' => $client_oid,
             'instrument_id'=> $instrument_id,
             'type' => $otype,
             'price' => $price,
             'size' => $size,
-            'match_price' => $match_price,
             'leverage' => $leverage,
-            'order_type' => $order_type
         ];
+
+        if ($client_oid) $params['client_oid'] = $client_oid;
+        if ($order_type) $params['order_type'] = $order_type;
+        if ($match_price) $params['match_price'] = $match_price;
 
         return $this->request(self::FUTURE_ORDER, $params, 'POST');
     }
@@ -139,16 +140,15 @@ class FuturesApi extends Utils {
     }
 
     // 获取订单列表
-    public function getOrderList($status, $froms, $to, $limit, $instrument_id='')
+    public function getOrderList($state, $instrument_id, $afters='', $before='', $limit='')
     {
-        $params = ['status' => $status, 'instrument_id' => $instrument_id];
+        $params = ['state' => $state];
 
-        if ($froms) $params['from'] = $froms;
-        if ($to) $params['to'] = $to;
+        if ($afters) $params['after'] = $afters;
+        if ($before) $params['before'] = $before;
         if ($limit) $params['limit'] = $limit;
-        if ($instrument_id) $params['instrument_id'] = $instrument_id;
 
-        return $this->request(self::FUTURE_ORDERS_LIST, $params, 'GET');
+        return $this->request(self::FUTURE_ORDERS_LIST."/$instrument_id", $params, 'GET');
     }
 
     // 获取订单信息
@@ -158,12 +158,12 @@ class FuturesApi extends Utils {
     }
 
     // 获取成交明细
-    public function getFills($order_id, $instrument_id, $froms, $to, $limit)
+    public function getFills($order_id, $instrument_id, $afters='', $before='', $limit='')
     {
         $params = [
             'order_id' => $order_id,
-            'from' => $froms,
-            'to' => $to,
+            'after' => $afters,
+            'before' => $before,
             'limit' => $limit,
             'instrument_id' => $instrument_id
         ];
@@ -198,11 +198,11 @@ class FuturesApi extends Utils {
     }
 
     // 获取成交数据
-    public function getTrades($instrument_id, $froms=0, $to=0, $limit=0)
+    public function getTrades($instrument_id, $afters=0, $before=0, $limit=0)
     {
         $params = ['instrument_id' => $instrument_id];
-        if ($froms) $params['from'] = $froms;
-        if ($to) $params['to'] = $to;
+        if ($afters) $params['after'] = $afters;
+        if ($before) $params['before'] = $before;
         if ($limit) $params['limit'] = $limit;
 
         return $this->request(self::FUTURE_TRADES.$instrument_id.'/trades', $params, 'GET', True);
@@ -251,12 +251,12 @@ class FuturesApi extends Utils {
     }
 
     // 获取爆仓单
-    public function getLiquidation($instrument_id, $status, $froms = 0, $to = 0, $limit = 0)
+    public function getLiquidation($instrument_id, $state, $afters = 0, $before = 0, $limit = 0)
     {
-        $params = ['instrument_id' => $instrument_id, 'status' => $status];
+        $params = ['instrument_id' => $instrument_id, 'status' => $state];
 
-        if ($froms) $params['from'] = $froms;
-        if ($to) $params['to'] = $to;
+        if ($afters) $params['after'] = $afters;
+        if ($before) $params['before'] = $before;
         if ($limit) $params['limit'] = $limit;
 
         return $this->request(self::FUTURE_LIQUIDATION.$instrument_id.'/liquidation', $params, 'GET');

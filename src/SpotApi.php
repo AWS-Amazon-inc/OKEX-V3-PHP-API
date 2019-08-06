@@ -20,12 +20,12 @@ class SpotApi extends Utils {
     const SPOT_ORDERS_LIST = '/api/spot/v3/orders';
     const SPOT_ORDER_INFO = '/api/spot/v3/orders/';
     const SPOT_FILLS = '/api/spot/v3/fills';
-    const SPOT_COIN_INFO = '/api/spot/v3/products';
-    const SPOT_DEPTH = '/api/spot/v3/products/';
-    const SPOT_TICKER = '/api/spot/v3/products/ticker';
-    const SPOT_SPECIFIC_TICKER = '/api/spot/v3/products/';
-    const SPOT_DEAL = '/api/spot/v3/products/';
-    const SPOT_KLINE = '/api/spot/v3/products/';
+    const SPOT_COIN_INFO = '/api/spot/v3/instruments';
+    const SPOT_DEPTH = '/api/spot/v3/instruments/';
+    const SPOT_TICKER = '/api/spot/v3/instruments/ticker';
+    const SPOT_SPECIFIC_TICKER = '/api/spot/v3/instruments/';
+    const SPOT_DEAL = '/api/spot/v3/instruments/';
+    const SPOT_KLINE = '/api/spot/v3/instruments/';
 
     // 币币账户信息
     public function getAccountInfo()

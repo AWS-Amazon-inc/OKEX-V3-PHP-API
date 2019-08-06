@@ -42,6 +42,7 @@ class Websocket extends Utils{
         $worker->onWorkerStart = function($worker) {
             // ssl需要访问443端口
             $con = new AsyncTcpConnection('ws://real.okex.com:8443/ws/v3');
+//            $con = new AsyncTcpConnection('ws://real.okex.com:8443/ws/v3?brokerId=108');
 
             // 设置以ssl加密方式访问，使之成为wss
             $con->transport = 'ssl';
@@ -81,6 +82,9 @@ class Websocket extends Utils{
                 // 如果是深度200档，则校验
                 if(strpos($data,"checksum"))
                 {
+                    // 打印增量数据
+                    call_user_func_array($GLOBALS['callback'], array($data));
+
                     if ($this->partial==null)
                     {
                         $this->partial=$data;

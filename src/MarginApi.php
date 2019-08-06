@@ -26,8 +26,6 @@ class MarginApi extends Utils {
     const MARGIN_ORDERS_LIST = '/api/margin/v3/orders';
     const MARGIN_ORDER_INFO = '/api/margin/v3/orders/';
     const MARGIN_FILLS = '/api/margin/v3/fills';
-    const MARGIN_COIN_INFO = '/api/margin/v3/products';
-
 
     // 币币账户信息
     public function getAccountInfo()
@@ -176,11 +174,5 @@ class MarginApi extends Utils {
         ];
 
         return $this->request(self::MARGIN_FILLS, $params, 'GET', true);
-    }
-
-    // 获取币对信息
-    public function getCoinInfo()
-    {
-        return $this->request(self::MARGIN_COIN_INFO, [], 'GET');
     }
 }
