@@ -27,9 +27,24 @@ $callback = function ($data) use ($obj){
 };
 
 $callbackTime = function ($data) use ($obj){
+    $dataArr = json_decode($data, true);
 
     $ntime = $obj->getTimestamp();
-    $otime = $obj -> oldTime;
+//    $key = $dataArr
+//    print_r($dataArr["op"]);
+//    die();
+    if (!empty($dataArr["table"]))
+        $key = $dataArr["table"];
+    elseif(!empty($dataArr["op"]))
+        $key = $dataArr["op"];
+    else
+        $key = "else";
+
+    // 上一次时间
+    if (!empty($key) && !empty($obj -> oldTime[$key]))
+        $otime = $obj -> oldTime[$key];
+    else
+        $otime = $ntime;
 
     // 上次与本次推送时间差，
     $lastDiff = $obj->dateToTimestamp($ntime)-$obj->dateToTimestamp($otime);
@@ -37,7 +52,6 @@ $callbackTime = function ($data) use ($obj){
 //    print_r("\n");
 
     // 本次，本地时间戳与推送数据时间戳的差
-    $dataArr = json_decode($data, true);
     if (!empty($dataArr["data"][0]["timestamp"])){
         $timestamp = $dataArr["data"][0]["timestamp"];
 //    if (!empty($dataArr["data"][0]["last_fill_time"])){
@@ -50,7 +64,9 @@ $callbackTime = function ($data) use ($obj){
         print_r("\n");
     }
 
-    $obj -> oldTime = $ntime;
+//    if (!empty($key) && !empty($obj -> oldTime[$key]))
+    $obj -> oldTime[$key] = $ntime;
+
 
 };
 
@@ -58,7 +74,7 @@ $callbackTime = function ($data) use ($obj){
  * spot
  */
 $instrumentId = "BTC-USDT";
-//$obj->subscribe($callbackTime,"spot/ticker:$instrumentId");
+$obj->subscribe($callbackTime,"spot/ticker:$instrumentId");
 //$obj->subscribe($callback,"spot/candle60s:$instrumentId");
 //$obj->subscribe($callbackTime,"spot/depth:$instrumentId");
 //$obj->subscribe($callbackTime,"spot/depth5:$instrumentId");
@@ -67,7 +83,7 @@ $instrumentId = "BTC-USDT";
 //$obj->subscribe($callbackTime,"spot/order:$instrumentId");
 //$obj->subscribe($callback,"spot/account:OKDK");
 
-$obj->subscribe($callbackTime,["spot/depth5:$instrumentId","spot/depth5:BTC-USDT","spot/depth5:XRP-USDT","spot/depth5:LTC-USDT","spot/depth5:BCH-USDT","spot/depth5:ETH-USDT","spot/depth5:TRX-USDT"]);
+//$obj->subscribe($callbackTime,["spot/depth5:$instrumentId","spot/depth5:BTC-USDT","spot/depth5:XRP-USDT","spot/depth5:LTC-USDT","spot/depth5:BCH-USDT","spot/depth5:ETH-USDT","spot/depth5:TRX-USDT"]);
 
 /**
  * margin
@@ -78,8 +94,8 @@ $obj->subscribe($callbackTime,["spot/depth5:$instrumentId","spot/depth5:BTC-USDT
  * futures
  */
 //$instrumentId= "EOS-USD-190927";
-$instrumentId= "LTC-USD-190927";
-//$instrumentId= "TRX-USD-190809";
+//$instrumentId= "LTC-USD-190927";
+$instrumentId= "BTC-USD-190809";
 //$instrumentId= "TRX-USD-190816";
 //$instrumentId= "BTC-USD-190802";
 //$instrumentId= "BTC-USD-190927";
@@ -102,8 +118,8 @@ $coin = "EOS";
 //$obj->subscribe($callback,"futures/mark_price:$instrumentId");
 //$obj->subscribe($callback,"futures/instruments");
 
-//$obj->subscribe($callback,["futures/position:$instrumentId","futures/order:EOS-USD-190802"]);
-$obj->subscribe($callbackTime,['futures/position:BTC-USD-190927', 'futures/position:LTC-USD-190927', 'futures/position:ETH-USD-190927', 'futures/position:ETC-USD-190927', 'futures/position:XRP-USD-190927', 'futures/position:EOS-USD-190927', 'futures/position:BCH-USD-190927', 'futures/position:BSV-USD-190927', 'futures/position:TRX-USD-190927']);
+$obj->subscribe($callbackTime,["futures/trade:$instrumentId","futures/ticker:$instrumentId"]);
+//$obj->subscribe($callbackTime,['futures/position:BTC-USD-190927', 'futures/position:LTC-USD-190927', 'futures/position:ETH-USD-190927', 'futures/position:ETC-USD-190927', 'futures/position:XRP-USD-190927', 'futures/position:EOS-USD-190927', 'futures/position:BCH-USD-190927', 'futures/position:BSV-USD-190927', 'futures/position:TRX-USD-190927']);
 
 
 /**

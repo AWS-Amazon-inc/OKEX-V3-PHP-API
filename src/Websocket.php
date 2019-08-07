@@ -22,7 +22,7 @@ $callback type: function 回调函数，当获得数据时会调用
 class Websocket extends Utils{
 
     // 上一次接收信息的时间，单个频道时用
-    public $oldTime="";
+    public $oldTime=[];
     // depth 200档的全量数据，包括合并的
     public $partial=null;
 
@@ -42,6 +42,7 @@ class Websocket extends Utils{
         $worker->onWorkerStart = function($worker) {
             // ssl需要访问443端口
             $con = new AsyncTcpConnection('ws://real.okex.com:8443/ws/v3');
+//            $con = new AsyncTcpConnection('ws://real.okcoin.com:10442/ws/v3');
 //            $con = new AsyncTcpConnection('ws://real.okex.com:8443/ws/v3?brokerId=108');
 
             // 设置以ssl加密方式访问，使之成为wss

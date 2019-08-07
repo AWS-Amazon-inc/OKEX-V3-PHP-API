@@ -234,7 +234,6 @@ $obj = new SwapApi(Config::$config);
 // 公共-获取合约历史资金费率
 $res = $obj->getHistoricalFundingRate($instrumentId);
 
-
 //var_dump($res);
 echo (json_encode($res, JSON_PRETTY_PRINT));
 echo "\n";
