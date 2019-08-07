@@ -13,6 +13,7 @@ namespace okv3;
 use Workerman\Lib\Timer;
 use Workerman\Worker;
 use Workerman\Connection\AsyncTcpConnection;
+use okv3\ChecksumTest;
 
 /*
 *订阅数据函数
