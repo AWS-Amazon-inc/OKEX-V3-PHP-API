@@ -16,5 +16,5 @@ class Config{
         "passphrase"=>"",
     ];
 
-    public static $debug="false";
+    public static $debug=0;
 }
