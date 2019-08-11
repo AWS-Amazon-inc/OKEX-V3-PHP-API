@@ -15,4 +15,6 @@ class Config{
         "apiSecret"=>"",
         "passphrase"=>"",
     ];
+
+    public static $debug="false";
 }
