@@ -198,7 +198,7 @@ $obj = new SwapApi(Config::$config);
 // 获取订单列表
 //$res = $obj->getOrderList(-1,$instrumentId);
 // 获取订单信息
-//$res = $obj->getOrderInfo("294683725542936576",$instrumentId);
+$res = $obj->getOrderInfo("296764659235508224",$instrumentId);
 // 获取成交明细
 //$res = $obj->getFills("294683725542936576",$instrumentId);
 // 获取合约信息
@@ -232,7 +232,7 @@ $obj = new SwapApi(Config::$config);
 // 公共-获取合约标记价格
 //$res = $obj->getMarkPrice($instrumentId);
 // 公共-获取合约历史资金费率
-$res = $obj->getHistoricalFundingRate($instrumentId);
+//$res = $obj->getHistoricalFundingRate($instrumentId);
 
 //var_dump($res);
 echo (json_encode($res, JSON_PRETTY_PRINT));
