@@ -130,7 +130,7 @@ class MarginApi extends Utils {
     }
 
     //撤销指定订单
-    public function cancelOrder($instrument_id, $order_id='', $client_oid='')
+    public function revokeOrder($instrument_id, $order_id='', $client_oid='')
     {
         $params = [
             'instrument_id' => $instrument_id,

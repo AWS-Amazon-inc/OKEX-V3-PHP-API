@@ -100,6 +100,9 @@ class Websocket extends Utils{
                         $result = $this->checksumTest->checksum($data);
 
                         if (!$result){
+                            // 如果校验失败，也打印一下，再报 checksum fail
+                            call_user_func_array($GLOBALS['callback'], array($data));
+
                             die(self::getTimestamp()." checksum fail\n");
                         }
 

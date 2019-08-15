@@ -64,7 +64,7 @@ $obj = new SpotApi(Config::$config);
 // 下单
 //$res = $obj -> takeOrder($instrumentId,"buy","0.1","3");
 // 撤销指定订单
-//$res = $obj -> cancelOrder($instrumentId,"3271097095905280");
+//$res = $obj -> revokeOrder($instrumentId,"3271097095905280");
 // 获取订单列表
 //$res = $obj -> getOrdersList($instrumentId,"2","","",1);
 // 获取订单信息
@@ -108,7 +108,7 @@ $obj = new MarginApi(Config::$config);
 // 下单
 //$res = $obj -> takeOrder($instrumentId,"sell","0.1","2","10");
 // 撤销指定订单
-//$res = $obj -> cancelOrder($instrumentId,"3292706588398592");
+//$res = $obj -> revokeOrder($instrumentId,"3292706588398592");
 // 获取订单列表
 //$res = $obj -> getOrdersList($instrumentId,"-1","","",1);
 // 获取订单信息
@@ -174,7 +174,7 @@ $obj = new FuturesApi(Config::$config);
 //$res = $obj->getHoldsAmount($instrumentId);
 
 // 永续合约-Ticker
-$instrumentId = "EOS-USD-SWAP";
+$instrumentId = "BTC-USD-SWAP";
 $currency = "EOS";
 $obj = new SwapApi(Config::$config);
 // 合约持仓信息
@@ -184,7 +184,7 @@ $obj = new SwapApi(Config::$config);
 // 所有币种合约账户信息
 //$res = $obj->getAccounts();
 // 单个币种合约账户信息
-//$res = $obj->getCoinAccounts($instrumentId);
+$res = $obj->getCoinAccounts($instrumentId);
 // 获取合约币种杠杆倍数
 //$res = $obj->getSettings($instrumentId);
 // 设定合约币种杠杆倍数
@@ -198,7 +198,7 @@ $obj = new SwapApi(Config::$config);
 // 获取订单列表
 //$res = $obj->getOrderList(-1,$instrumentId);
 // 获取订单信息
-$res = $obj->getOrderInfo("296764659235508224",$instrumentId);
+//$res = $obj->getOrderInfo("296764659235508224",$instrumentId);
 // 获取成交明细
 //$res = $obj->getFills("294683725542936576",$instrumentId);
 // 获取合约信息
@@ -234,6 +234,53 @@ $res = $obj->getOrderInfo("296764659235508224",$instrumentId);
 // 公共-获取合约历史资金费率
 //$res = $obj->getHistoricalFundingRate($instrumentId);
 
-//var_dump($res);
 echo (json_encode($res, JSON_PRETTY_PRINT));
 echo "\n";
+
+die();
+
+//var_dump($res);
+$obj = new SpotApi(Config::$config);
+
+$int=1;
+while (true)
+{
+
+    // 下单
+// 撤销指定订单
+// 获取订单列表
+//$res = $obj -> getOrdersList($instrumentId,"2","","",1);
+// 获取订单信息
+    $instrumentId = "EOS-USDT";
+
+    $int++;
+
+    // 批量下单
+    $client_oid = "";
+    $order_id = "";
+
+//    $client_oid+="";
+    // 下单
+    $res = $obj -> takeOrder($instrumentId,"sell","0.1","8","","liuheng123aaa".$int);
+    echo (json_encode($res)."\n\n");
+
+    $client_oid = $res["client_oid"];
+    $order_id = $res["order_id"];
+
+    // 撤销指定订单
+    $res = $obj -> cancelOrder($instrumentId,$client_oid);
+    echo (json_encode($res)."\n\n");
+
+    // 获取订单信息
+    $res = $obj -> getOrderInfo($instrumentId,$client_oid);
+    echo (json_encode($res)."\n\n");
+
+    if ($order_id!=$res["order_id"])
+        die("empty");
+
+    echo ("------------------------------------------------------\n");
+
+
+}
+
+

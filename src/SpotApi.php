@@ -63,7 +63,7 @@ class SpotApi extends Utils {
 
         if ($price) $params['price'] = $price;
         if ($notional) $params['notional'] = $notional;
-        if ($client_oid) $params['limit'] = $client_oid;
+        if ($client_oid) $params['client_oid'] = $client_oid;
         if ($type) $params['type'] = $type;
         if ($order_type) $params['order_type'] = $order_type;
 
@@ -71,7 +71,7 @@ class SpotApi extends Utils {
     }
 
     //撤销指定订单
-    public function cancelOrder($instrument_id, $order_id='', $client_oid='')
+    public function revokeOrder($instrument_id, $order_id='', $client_oid='')
     {
         $params = [
             'instrument_id' => $instrument_id,

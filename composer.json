@@ -15,7 +15,8 @@
 
     "autoload": {
         "psr-4": {
-            "okv3\\" : "src"
+            "okv3\\" : "src",
+            "test\\" : "test"
         },
 
         "files": [

@@ -16,7 +16,7 @@ class SwapApi extends Utils {
     const SWAP_POSITION = '/api/swap/v3/position';
     const SWAP_SPECIFIC_POSITION = '/api/swap/v3/';
     const SWAP_ACCOUNTS = '/api/swap/v3/accounts';
-    const SWAP_COIN_ACCOUNT = '/api/swap/v3/accounts/';
+    const SWAP_COIN_ACCOUNT = '/api/swap/v3/';
     const SWAP_GET_SETTINGS = '/api/swap/v3/accounts/';
     const SWAP_SET_LEVERAGE = '/api/swap/v3/accounts/';
     const SWAP_LEDGER = '/api/swap/v3/accounts/';
