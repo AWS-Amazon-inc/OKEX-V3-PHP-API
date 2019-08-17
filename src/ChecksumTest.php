@@ -21,7 +21,6 @@ class ChecksumTest
         $partial = json_decode($partial, true);
 
         $asks = array_values($partial["data"][0]["asks"]);
-
         $bids = array_values($partial["data"][0]["bids"]);
 
         $strs="";
