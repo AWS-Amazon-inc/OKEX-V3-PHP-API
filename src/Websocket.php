@@ -119,8 +119,8 @@ class Websocket extends Utils{
                 if (isset($data["success"])){
                     // 订阅频道
                     $data = json_encode([
-                        'op' => "subscribe",
-                        'args' => $GLOBALS['sub_str']
+                        'args' => $GLOBALS['sub_str'],
+                        'op' => "subscribe"
                     ], JSON_UNESCAPED_SLASHES);
 
                     $ntime = $this->getTimestamp();

@@ -41,17 +41,25 @@ class Utils
             curl_setopt($ch, CURLOPT_POSTFIELDS, $body);
         }
 
+        curl_setopt($ch, CURLOPT_HTTPGET, true);
+
+
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER , false);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-        // 头信息
-//        curl_setopt($ch, CURLOPT_HEADER, true);
-//        curl_setopt($ch, CURLOPT_NOBODY,true);
         curl_setopt($ch, CURLINFO_HEADER_OUT,true);
 
 
+        // 头信息
+        curl_setopt($ch, CURLOPT_HEADER, true);
+//        curl_setopt($ch, CURLOPT_NOBODY,true);
+
+
         $return = curl_exec($ch);
+
+        $headerSize = curl_getinfo($ch, CURLINFO_HEADER_SIZE);
+        $headerTotal = strlen($return);
+        $bodySize = $headerTotal - $headerSize;
 
 
         if(!curl_errno($ch))
@@ -60,13 +68,31 @@ class Utils
             if (Config::$debug)
             {
                 echo ($info);
+
+                // 获得响应结果里的：头大小
+//                $headerSize = curl_getinfo($ch, CURLINFO_HEADER_SIZE);
+//                // 根据头大小去获取头信息内容
+//                $header = substr($return, 0, $headerSize);
+//
+                print_r(substr($return, 0, $headerSize-1));
+                print_r("TIMESTAMP: ".self::getTimestamp());
+                print_r("\n\n");
+
+
             }
         }
 
+//        $body = substr($sContent, $headerSize, $bodySize);
 
-        $return = json_decode($return,true);
+        $body = substr($return, $headerSize, $bodySize);
 
-        return $return;
+//        print_r("headerSize:".$headerSize."\n");
+//        print_r("headerTotal:".$headerTotal."\n");
+//        print_r("bodySize:".$bodySize."\n");
+
+        $body = json_decode($body,true);
+
+        return $body;
     }
 
     public static function getHeader($apiKey, $sign, $timestamp, $passphrase, $textToSign)

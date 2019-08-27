@@ -78,7 +78,7 @@ $obj = new SpotApi(Config::$config);
 // 获取全部ticker信息
 //$res = $obj -> getTicker();
 // 获取某个ticker信息
-//$res = $obj -> getSpecificTicker($instrumentId);
+$res = $obj -> getSpecificTicker($instrumentId);
 // 获取成交数据
 //$res = $obj -> getDeal($instrumentId);
 // 获取K线
@@ -176,7 +176,7 @@ $obj = new FuturesApi(Config::$config);
 // 永续合约-Ticker
 $instrumentId = "BTC-USD-SWAP";
 $currency = "EOS";
-$obj = new SwapApi(Config::$config);
+//$obj = new SwapApi(Config::$config);
 // 合约持仓信息
 //$res = $obj->getPosition();
 // 单个合约持仓信息
@@ -184,7 +184,7 @@ $obj = new SwapApi(Config::$config);
 // 所有币种合约账户信息
 //$res = $obj->getAccounts();
 // 单个币种合约账户信息
-$res = $obj->getCoinAccounts($instrumentId);
+//$res = $obj->getCoinAccounts($instrumentId);
 // 获取合约币种杠杆倍数
 //$res = $obj->getSettings($instrumentId);
 // 设定合约币种杠杆倍数
