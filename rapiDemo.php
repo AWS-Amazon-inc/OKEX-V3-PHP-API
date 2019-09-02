@@ -23,7 +23,7 @@ use Workerman\Worker;
  * 资金账户
  */
 $obj = new AccountApi(Config::$config);
-$coin = "EOS";
+$coin = "eos";
 // 资金账户信息，多个币种
 //$res = $obj -> getWalletInfo();
 // 单一币种账户信息
@@ -31,7 +31,7 @@ $coin = "EOS";
 // 资金划转
 //$res = $obj -> transfer($coin,"0.1","6","1","","");
 // 提币
-//$res = $obj -> withdrawal($coin,"0.1","3","eostoliuheng","123","1");
+$res = $obj -> withdrawal($coin,"1","4","eostoliuheng:OKEx","123456","0.1");
 // 账单流水
 //$res = $obj -> getLeger("EOS");
 // 获取充值地址
@@ -64,7 +64,7 @@ $obj = new SpotApi(Config::$config);
 // 下单
 //$res = $obj -> takeOrder($instrumentId,"buy","0.1","3");
 // 撤销指定订单
-//$res = $obj -> revokeOrder($instrumentId,"3271097095905280");
+//$res = $obj -> revokeOrder($instrumentId,"3452612358987776");
 // 获取订单列表
 //$res = $obj -> getOrdersList($instrumentId,"2","","",1);
 // 获取订单信息
@@ -78,7 +78,7 @@ $obj = new SpotApi(Config::$config);
 // 获取全部ticker信息
 //$res = $obj -> getTicker();
 // 获取某个ticker信息
-$res = $obj -> getSpecificTicker($instrumentId);
+//$res = $obj -> getSpecificTicker($instrumentId);
 // 获取成交数据
 //$res = $obj -> getDeal($instrumentId);
 // 获取K线

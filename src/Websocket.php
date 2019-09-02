@@ -40,11 +40,21 @@ class Websocket extends Utils{
         $GLOBALS['sub_str'] = $sub_str;
         $GLOBALS['callback'] = $callback;
         $worker = new Worker();
-        $worker->onWorkerStart = function($worker) {
+
+        // 线上
+        $url = "ws://real.okex.com:8443/ws/v3";
+        // 预发
+//        $url = "ws://okexcomrealtest.bafang.com:10442/ws/v3";
+        // 杭州
+//        $url = "ws://okexcomreal.bafang.com:10442/ws/v3";
+
+
+        $worker->onWorkerStart = function($worker) use ($url){
             // ssl需要访问443端口
-            $con = new AsyncTcpConnection('ws://real.okex.com:8443/ws/v3');
-//            $con = new AsyncTcpConnection('ws://real.okcoin.com:10442/ws/v3');
-//            $con = new AsyncTcpConnection('ws://real.okex.com:8443/ws/v3?brokerId=108');
+            $con = new AsyncTcpConnection($url);
+
+            $ntime = $this->getTimestamp();
+            print_r($ntime." $url\n");
 
             // 设置以ssl加密方式访问，使之成为wss
             $con->transport = 'ssl';
@@ -58,7 +68,7 @@ class Websocket extends Utils{
                 print_r($ntime." ping\n");
             });
 
-            $con->onConnect = function($con) {
+            $con->onConnect = function($con){
 
                 // 登陆
                 $timestamp = self::get_millisecond();
@@ -119,8 +129,8 @@ class Websocket extends Utils{
                 if (isset($data["success"])){
                     // 订阅频道
                     $data = json_encode([
-                        'args' => $GLOBALS['sub_str'],
-                        'op' => "subscribe"
+                        'op' => "subscribe",
+                        'args' => $GLOBALS['sub_str']
                     ], JSON_UNESCAPED_SLASHES);
 
                     $ntime = $this->getTimestamp();

@@ -21,34 +21,36 @@ class Utils
 
     public  static  function request($requestPath, $params, $method, $cursor = false)
     {
+
+        $url = self::FUTURE_API_URL.$requestPath;
+
+        $ch= curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+
+
+
         if (strtoupper($method) == 'GET') {
             $requestPath .= $params ? '?'.http_build_query($params) : '';
             $params = [];
+            curl_setopt($ch, CURLOPT_HTTPGET, true);
         }
 
-        $url = self::FUTURE_API_URL.$requestPath;
         $body = $params ? json_encode($params, JSON_UNESCAPED_SLASHES) : '';
         $timestamp = self::getTimestamp();
 
         $sign = self::signature($timestamp, $method, $requestPath, $body, self::$apiSecret);
         $headers = self::getHeader(self::$apiKey, $sign, $timestamp, self::$passphrase, self::$textToSign);
 
-        $ch= curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
 
         if($method == "POST") {
             curl_setopt($ch, CURLOPT_POST, true);
             curl_setopt($ch, CURLOPT_POSTFIELDS, $body);
         }
 
-        curl_setopt($ch, CURLOPT_HTTPGET, true);
-
-
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER , false);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER , TRUE);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLINFO_HEADER_OUT,true);
-
 
         // 头信息
         curl_setopt($ch, CURLOPT_HEADER, true);
@@ -74,7 +76,7 @@ class Utils
 //                // 根据头大小去获取头信息内容
 //                $header = substr($return, 0, $headerSize);
 //
-                print_r(substr($return, 0, $headerSize-1));
+                print_r(substr($return, 0, $headerSize-2));
                 print_r("TIMESTAMP: ".self::getTimestamp());
                 print_r("\n\n");
 
