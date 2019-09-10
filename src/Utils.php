@@ -22,18 +22,17 @@ class Utils
     public  static  function request($requestPath, $params, $method, $cursor = false)
     {
 
+        if (strtoupper($method) == 'GET') {
+            $requestPath .= $params ? '?'.http_build_query($params) : '';
+            $params = [];
+
+
+        }
+
         $url = self::FUTURE_API_URL.$requestPath;
 
         $ch= curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
-
-
-
-        if (strtoupper($method) == 'GET') {
-            $requestPath .= $params ? '?'.http_build_query($params) : '';
-            $params = [];
-            curl_setopt($ch, CURLOPT_HTTPGET, true);
-        }
 
         $body = $params ? json_encode($params, JSON_UNESCAPED_SLASHES) : '';
         $timestamp = self::getTimestamp();

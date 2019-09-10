@@ -73,10 +73,10 @@ $callbackTime = function ($data) use ($obj){
 /**
  * spot
  */
-$instrumentId = "NEO-BTC";
+$instrumentId = "BTC-USDT";
 $coin = "EOS";
 //$obj->subscribe($callbackTime,"spot/ticker:$instrumentId");
-//$obj->subscribe($callback,"spot/candle60s:$instrumentId");
+$obj->subscribe($callback,"spot/candle3600s:$instrumentId");
 //$obj->subscribe($callbackTime,"spot/depth:$instrumentId");
 //$obj->subscribe($callbackTime,"spot/depth5:$instrumentId");
 //$obj->subscribe($callbackTime,"spot/trade:$instrumentId");
@@ -97,12 +97,12 @@ $coin = "EOS";
 //$instrumentId= "EOS-USD-190816";
 $instrumentId= "BTC-USD-190927";
 $coin = "EOS";
-//$obj->subscribe($callbackTime,"futures/ticker:$instrumentId");
+$obj->subscribe($callbackTime,"futures/ticker:$instrumentId");
 //$obj->subscribe($callback,"futures/candle1800s:$instrumentId");
 //$obj->subscribe($callback,"futures/candle60s:$instrumentId");
 //$obj->subscribe($callback,"futures/candle900s:$instrumentId");
 //$obj->subscribe($callbackTime,"futures/depth:$instrumentId");
-$obj->subscribe($callbackTime,"futures/depth5:$instrumentId");
+//$obj->subscribe($callbackTime,"futures/depth5:$instrumentId");
 //$obj->subscribe($callbackTime,"futures/trade:$instrumentId");
 //$obj->subscribe($callback,["futures/account:$coin"]);
 //$obj->subscribe($callbackTime,"futures/order:$instrumentId");
@@ -121,7 +121,7 @@ $obj->subscribe($callbackTime,"futures/depth5:$instrumentId");
 /**
  * swap
  */
-$instrumentId= "BTC-USD-SWAP";
+$instrumentId= "XRP-USD-SWAP";
 $coin = "EOS";
 //$obj->subscribe($callbackTime,"swap/ticker:$instrumentId");
 //$obj->subscribe($callback,"swap/candle60s:$instrumentId");
@@ -129,7 +129,7 @@ $coin = "EOS";
 //$obj->subscribe($callback,"swap/depth5:$instrumentId");
 //$obj->subscribe($callback,"swap/trade:$instrumentId");
 //$obj->subscribe($callback,"swap/account:$instrumentId");
-//$obj->subscribe($callbackTime,"swap/order:$instrumentId");
+$obj->subscribe($callbackTime,"swap/order:$instrumentId");
 //$obj->subscribe($callbackTime,["swap/position:$instrumentId","swap/order:$instrumentId","swap/account:$instrumentId"]);
 
 

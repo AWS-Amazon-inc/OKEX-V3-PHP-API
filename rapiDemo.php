@@ -23,7 +23,7 @@ use Workerman\Worker;
  * 资金账户
  */
 $obj = new AccountApi(Config::$config);
-$coin = "eos";
+$coin = "XMR";
 // 资金账户信息，多个币种
 //$res = $obj -> getWalletInfo();
 // 单一币种账户信息
@@ -31,7 +31,7 @@ $coin = "eos";
 // 资金划转
 //$res = $obj -> transfer($coin,"0.1","6","1","","");
 // 提币
-$res = $obj -> withdrawal($coin,"1","4","eostoliuheng:OKEx","123456","0.1");
+//$res = $obj -> withdrawal($coin,"1","4","eostoliuheng:OKEx","123456","0.1");
 // 账单流水
 //$res = $obj -> getLeger("EOS");
 // 获取充值地址
@@ -52,7 +52,7 @@ $res = $obj -> withdrawal($coin,"1","4","eostoliuheng:OKEx","123456","0.1");
 /**
  * 币币
  */
-$instrumentId = "EOS-USDT";
+$instrumentId = "BTC-USDT";
 $currency = "EOS";
 $obj = new SpotApi(Config::$config);
 // 币币账户信息
@@ -82,7 +82,7 @@ $obj = new SpotApi(Config::$config);
 // 获取成交数据
 //$res = $obj -> getDeal($instrumentId);
 // 获取K线
-//$res = $obj -> getKine($instrumentId);
+//$res = $obj -> getKine($instrumentId,3600);
 
 // 币币杠杆账户信息
 $instrumentId = "EOS-USDT";
@@ -119,6 +119,7 @@ $obj = new MarginApi(Config::$config);
 
 // 交割合约-Ticker
 $instrumentId = "EOS-USD-190927";
+$coin = "EOS";
 $obj = new FuturesApi(Config::$config);
 // 合约持仓信息
 //$res = $obj->getPosition();
@@ -131,7 +132,7 @@ $obj = new FuturesApi(Config::$config);
 // 获取合约币种杠杆倍数
 //$res = $obj->getLeverage($coin);
 // 设定合约币种杠杆倍数
-//$res = $obj->setLeverage($coin, 10);
+$res = $obj->setLeverage($coin, 10);
 // 账单流水查询
 //$res = $obj->getLedger($coin);
 // 下单
@@ -234,7 +235,7 @@ $currency = "EOS";
 // 公共-获取合约历史资金费率
 //$res = $obj->getHistoricalFundingRate($instrumentId);
 
-echo (json_encode($res, JSON_PRETTY_PRINT));
+echo (json_encode($res));
 echo "\n";
 
 die();
