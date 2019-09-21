@@ -62,6 +62,8 @@ class Utils
         $headerTotal = strlen($return);
         $bodySize = $headerTotal - $headerSize;
 
+        $body = substr($return, $headerSize, $bodySize);
+
 
         if(!curl_errno($ch))
         {
@@ -79,13 +81,13 @@ class Utils
                 print_r("TIMESTAMP: ".self::getTimestamp());
                 print_r("\n\n");
 
-
+                print_r($body);
+                print_r("\n\n");
             }
         }
 
 //        $body = substr($sContent, $headerSize, $bodySize);
 
-        $body = substr($return, $headerSize, $bodySize);
 
 //        print_r("headerSize:".$headerSize."\n");
 //        print_r("headerTotal:".$headerTotal."\n");
