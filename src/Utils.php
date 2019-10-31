@@ -46,10 +46,15 @@ class Utils
             curl_setopt($ch, CURLOPT_POSTFIELDS, $body);
         }
 
+        // 设置超时时间
+//        curl_setopt($ch, CURLOPT_TIMEOUT_MS,60);
+
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER , TRUE);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLINFO_HEADER_OUT,true);
+
+
 
         // 头信息
         curl_setopt($ch, CURLOPT_HEADER, true);
@@ -70,19 +75,33 @@ class Utils
             $info = curl_getinfo($ch,CURLINFO_HEADER_OUT);
             if (Config::$debug)
             {
-                echo ($info);
 
-                // 获得响应结果里的：头大小
+            }
+
+            switch (true)
+            {
+                // 全部debug
+                case Config::$debug==1;
+                    echo ($info);
+
+                    // 获得响应结果里的：头大小
 //                $headerSize = curl_getinfo($ch, CURLINFO_HEADER_SIZE);
 //                // 根据头大小去获取头信息内容
 //                $header = substr($return, 0, $headerSize);
-//
-                print_r(substr($return, 0, $headerSize-2));
-                print_r("TIMESTAMP: ".self::getTimestamp());
-                print_r("\n\n");
 
-                print_r($body);
-                print_r("\n\n");
+                    print_r(substr($return, 0, $headerSize-2));
+                    print_r("TIMESTAMP: ".self::getTimestamp());
+                    print_r("\n\n");
+
+                    print_r($body);
+                    print_r("\n\n");
+                    break;
+
+                // 仅 response body
+                case Config::$debug==2;
+                    $ntime = self::getTimestamp();
+                    print_r($ntime." $body\n");
+                    break;
             }
         }
 

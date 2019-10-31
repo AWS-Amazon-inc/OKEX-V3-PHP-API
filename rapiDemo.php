@@ -62,7 +62,7 @@ $obj = new SpotApi(Config::$config);
 // 账单流水查询
 //$res = $obj -> getLedgerRecord($currency);
 // 下单
-//$res = $obj -> takeOrder($instrumentId,"buy","0.1","3");
+//$res = $obj -> takeOrder($instrumentId,"buy","0.1","2");
 // 撤销指定订单
 //$res = $obj -> revokeOrder($instrumentId,"3452612358987776");
 // 获取订单列表
@@ -78,7 +78,7 @@ $obj = new SpotApi(Config::$config);
 // 获取全部ticker信息
 //$res = $obj -> getTicker();
 // 获取某个ticker信息
-//$res = $obj -> getSpecificTicker($instrumentId);
+$res = $obj -> getSpecificTicker($instrumentId);
 // 获取成交数据
 //$res = $obj -> getDeal($instrumentId);
 // 获取K线
@@ -118,7 +118,7 @@ $obj = new MarginApi(Config::$config);
 
 
 // 交割合约-Ticker
-$instrumentId = "EOS-USD-190927";
+$instrumentId = "TRX-USD-191018";
 $coin = "EOS";
 $obj = new FuturesApi(Config::$config);
 // 合约持仓信息
@@ -132,7 +132,7 @@ $obj = new FuturesApi(Config::$config);
 // 获取合约币种杠杆倍数
 //$res = $obj->getLeverage($coin);
 // 设定合约币种杠杆倍数
-$res = $obj->setLeverage($coin, 10);
+//$res = $obj->setLeverage($coin, 10);
 // 账单流水查询
 //$res = $obj->getLedger($coin);
 // 下单
@@ -175,7 +175,7 @@ $res = $obj->setLeverage($coin, 10);
 //$res = $obj->getHoldsAmount($instrumentId);
 
 // 永续合约-Ticker
-$instrumentId = "BTC-USD-SWAP";
+$instrumentId = "EOS-USD-SWAP";
 $currency = "EOS";
 //$obj = new SwapApi(Config::$config);
 // 合约持仓信息
@@ -234,54 +234,13 @@ $currency = "EOS";
 //$res = $obj->getMarkPrice($instrumentId);
 // 公共-获取合约历史资金费率
 //$res = $obj->getHistoricalFundingRate($instrumentId);
+//
+//echo ($res["holding"][0]["short_qty"]);
+//echo "\n";
 
-echo (json_encode($res));
-echo "\n";
+// 指数
 
-die();
+//$res = $obj->getHistoricalFundingRate($instrumentId);
 
-//var_dump($res);
-$obj = new SpotApi(Config::$config);
-
-$int=1;
-while (true)
-{
-
-    // 下单
-// 撤销指定订单
-// 获取订单列表
-//$res = $obj -> getOrdersList($instrumentId,"2","","",1);
-// 获取订单信息
-    $instrumentId = "EOS-USDT";
-
-    $int++;
-
-    // 批量下单
-    $client_oid = "";
-    $order_id = "";
-
-//    $client_oid+="";
-    // 下单
-    $res = $obj -> takeOrder($instrumentId,"sell","0.1","8","","liuheng123aaa".$int);
-    echo (json_encode($res)."\n\n");
-
-    $client_oid = $res["client_oid"];
-    $order_id = $res["order_id"];
-
-    // 撤销指定订单
-    $res = $obj -> cancelOrder($instrumentId,$client_oid);
-    echo (json_encode($res)."\n\n");
-
-    // 获取订单信息
-    $res = $obj -> getOrderInfo($instrumentId,$client_oid);
-    echo (json_encode($res)."\n\n");
-
-    if ($order_id!=$res["order_id"])
-        die("empty");
-
-    echo ("------------------------------------------------------\n");
-
-
-}
 
 

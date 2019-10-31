@@ -10,7 +10,8 @@
         }
     ],
     "require": {
-        "workerman/workerman": "^3.5"
+        "workerman/workerman": "^3.5",
+        "phpunit/phpunit": "^8.4"
     },
 
     "autoload": {

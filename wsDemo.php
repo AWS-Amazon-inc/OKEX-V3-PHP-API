@@ -73,18 +73,18 @@ $callbackTime = function ($data) use ($obj){
 /**
  * spot
  */
-$instrumentId = "BTC-USDT";
+$instrumentId = "XUC-BTC";
 $coin = "EOS";
 //$obj->subscribe($callbackTime,"spot/ticker:$instrumentId");
-//$obj->subscribe($callback,"spot/candle3600s:$instrumentId");
+//$obj->subscribe($callback,"spot/candle60s:$instrumentId");
 //$obj->subscribe($callbackTime,"spot/depth:$instrumentId");
 //$obj->subscribe($callbackTime,"spot/depth5:$instrumentId");
 //$obj->subscribe($callbackTime,"spot/trade:$instrumentId");
 //$obj->subscribe($callback);
-//$obj->subscribe($callbackTime,"spot/order:$instrumentId");
-//$obj->subscribe($callback,"spot/account:OKDK");
+$obj->subscribe($callbackTime,"spot/order:*");
+//$obj->subscribe($callback,"spot/account:EOS");
 
-//$obj->subscribe($callbackTime,["spot/ticker:BCH-BTC","spot/ticker:BSV-BTC","spot/ticker:DASH-BTC","spot/ticker:ADA-BTC","spot/ticker:ABL-BTC","spot/ticker:AE-BTC","spot/ticker:ALGO-BTC","spot/ticker:ARDR-BTC","spot/ticker:ATOM-BTC","spot/ticker:BLOC-BTC","spot/ticker:BTT-BTC","spot/ticker:CAI-BTC","spot/ticker:CTXC-BTC","spot/ticker:CVT-BTC","spot/ticker:DCR-BTC","spot/ticker:EGT-BTC","spot/ticker:GUSD-BTC","spot/ticker:HPB-BTC","spot/ticker:HYC-BTC","spot/ticker:KAN-BTC","spot/ticker:LBA-BTC","spot/ticker:LEO-BTC","spot/ticker:LET-BTC","spot/ticker:LSK-BTC","spot/ticker:NXT-BTC","spot/ticker:ORS-BTC","spot/ticker:PAX-BTC","spot/ticker:SC-BTC","spot/ticker:TUSD-BTC","spot/ticker:USDC-BTC","spot/ticker:VITE-BTC","spot/ticker:WAVES-BTC","spot/ticker:WIN-BTC","spot/ticker:WXT-BTC","spot/ticker:XAS-BTC","spot/ticker:YOU-BTC","spot/ticker:ZCO-BTC","spot/ticker:ZIL-BTC","spot/ticker:XRP-BTC","spot/ticker:ELF-BTC","spot/ticker:LRC-BTC","spot/ticker:MCO-BTC","spot/ticker:NULS-BTC","spot/ticker:BCX-BTC","spot/ticker:CMT-BTC","spot/ticker:EDO-BTC","spot/ticker:ITC-BTC","spot/ticker:SBTC-BTC","spot/ticker:ZEC-BTC","spot/ticker:NEO-BTC","spot/ticker:GAS-BTC","spot/ticker:HC-BTC","spot/ticker:QTUM-BTC","spot/ticker:IOTA-BTC","spot/ticker:XUC-BTC","spot/ticker:EOS-BTC","spot/ticker:SNT-BTC","spot/ticker:OMG-BTC","spot/ticker:LTC-BTC","spot/ticker:ETH-BTC","spot/ticker:ETC-BTC","spot/ticker:BCD-BTC","spot/ticker:BTG-BTC","spot/ticker:ACT-BTC","spot/ticker:PAY-BTC","spot/ticker:BTM-BTC","spot/ticker:DGD-BTC","spot/ticker:GNT-BTC","spot/ticker:LINK-BTC","spot/ticker:WTC-BTC","spot/ticker:ZRX-BTC","spot/ticker:BNT-BTC","spot/ticker:CVC-BTC","spot/ticker:MANA-BTC","spot/ticker:KNC-BTC","spot/ticker:GNX-BTC","spot/ticker:ICX-BTC","spot/ticker:XEM-BTC","spot/ticker:ARK-BTC","spot/ticker:YOYO-BTC","spot/ticker:FUN-BTC","spot/ticker:ACE-BTC","spot/ticker:TRX-BTC","spot/ticker:DGB-BTC","spot/ticker:SWFTC-BTC","spot/ticker:XMR-BTC","spot/ticker:XLM-BTC","spot/ticker:KCASH-BTC","spot/ticker:MDT-BTC","spot/ticker:NAS-BTC","spot/ticker:UGC-BTC","spot/ticker:DPY-BTC","spot/ticker:SSC-BTC","spot/ticker:AAC-BTC","spot/ticker:VIB-BTC","spot/ticker:QUN-BTC","spot/ticker:INT-BTC","spot/ticker:IOST-BTC","spot/ticker:INS-BTC","spot/ticker:MOF-BTC"]);
+//$obj->subscribe($callbackTime,["spot/candle60s:$instrumentId","spot/trade:$instrumentId"]);
 
 /**
  * margin
@@ -94,34 +94,36 @@ $coin = "EOS";
 /**
  * futures
  */
-//$instrumentId= "EOS-USD-190816";
-$instrumentId= "EOS-USD-190920";
+//$instrumentId= "ETH-USD-190816";
+$instrumentId= "BTC-USD-191108";
 $coin = "EOS";
 //$obj->subscribe($callbackTime,"futures/ticker:$instrumentId");
 //$obj->subscribe($callback,"futures/candle1800s:$instrumentId");
 //$obj->subscribe($callback,"futures/candle60s:$instrumentId");
 //$obj->subscribe($callback,"futures/candle900s:$instrumentId");
-//$obj->subscribe($callbackTime,"futures/depth:$instrumentId");
+$obj->subscribe($callbackTime,"futures/depth:$instrumentId");
+//$obj->subscribe($callbackTime,"futures/depth_l2_tbt:$instrumentId");
 //$obj->subscribe($callbackTime,"futures/depth5:$instrumentId");
 //$obj->subscribe($callbackTime,"futures/trade:$instrumentId");
 //$obj->subscribe($callback,["futures/account:$coin"]);
-$obj->subscribe($callbackTime,"futures/order:$instrumentId");
+//$obj->subscribe($callbackTime,"futures/order:$instrumentId");
 
 //$obj->subscribe($callbackTime,"futures/position:$instrumentId");
 //$obj->subscribe($callback,"futures/estimated_price:$instrumentId");
 //$obj->subscribe($callback,"futures/price_range:$instrumentId");
 //$obj->subscribe($callback,"futures/mark_price:$instrumentId");
 //$obj->subscribe($callback,"futures/mark_price:$instrumentId");
-//$obj->subscribe($callback,"futures/instruments");
+//$obj->subscribe($callback,["futures/instruments"]);
+//$obj->subscribe($callback,"futures/depth_l2_tbt:$instrumentId");
 
-//$obj->subscribe($callbackTime,["futures/depth:$instrumentId","futures/depth5:$instrumentId"]);
+//$obj->subscribe($callbackTime,["futures/position:$instrumentId","futures/order:$instrumentId"]);
 //$obj->subscribe($callbackTime,['futures/position:BTC-USD-190927', 'futures/position:LTC-USD-190927', 'futures/position:ETH-USD-190927', 'futures/position:ETC-USD-190927', 'futures/position:XRP-USD-190927', 'futures/position:EOS-USD-190927', 'futures/position:BCH-USD-190927', 'futures/position:BSV-USD-190927', 'futures/position:TRX-USD-190927']);
 
 
 /**
  * swap
  */
-$instrumentId= "BTC-USD-SWAP";
+$instrumentId= "EOS-USD-SWAP";
 $coin = "EOS";
 //$obj->subscribe($callbackTime,"swap/ticker:$instrumentId");
 //$obj->subscribe($callback,"swap/candle60s:$instrumentId");
@@ -129,8 +131,9 @@ $coin = "EOS";
 //$obj->subscribe($callback,"swap/depth5:$instrumentId");
 //$obj->subscribe($callback,"swap/trade:$instrumentId");
 //$obj->subscribe($callback,"swap/account:$instrumentId");
-//$obj->subscribe($callbackTime,"swap/order:$instrumentId");
-//$obj->subscribe($callbackTime,["swap/ticker:$instrumentId","swap/depth5:$instrumentId"]);
+$obj->subscribe($callbackTime,"swap/order:$instrumentId");
+//$obj->subscribe($callbackTime,"swap/order_algo:$instrumentId");
+//$obj->subscribe($callbackTime,["swap/order_algo:$instrumentId","swap/order:$instrumentId"]);
 
 
 //$obj->subscribe($callback,"swap/position:$instrumentId");
@@ -143,5 +146,4 @@ $coin = "EOS";
  */
 //$obj->subscribe($callback,"index/ticker:BTC-USD");
 //$obj->subscribe($callback,"index/candle60s:EOS-USD");
-
 

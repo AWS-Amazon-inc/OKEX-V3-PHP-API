@@ -42,7 +42,7 @@ class Websocket extends Utils{
         $worker = new Worker();
 
         // 线上
-        $url = "ws://real.okex.com:8443/ws/v3";
+        $url = "ws://real.okex.com:10442/ws/v3";
         // 预发
 //        $url = "ws://okexcomrealtest.bafang.com:10442/ws/v3";
         // 杭州
@@ -94,9 +94,6 @@ class Websocket extends Utils{
                 // 如果是深度200档，则校验
                 if(strpos($data,"checksum"))
                 {
-                    // 打印增量数据
-                    call_user_func_array($GLOBALS['callback'], array($data));
-
                     if ($this->partial==null)
                     {
                         $this->partial=$data;
@@ -109,12 +106,15 @@ class Websocket extends Utils{
                         // 深度校验结果
                         $result = $this->checksumTest->checksum($data);
 
-                        if (!$result){
-                            // 如果校验失败，也打印一下，再报 checksum fail
-                            call_user_func_array($GLOBALS['callback'], array($data));
-
+                        if ($result){
+                            print_r("---------------------------------------------------------------\n");
+                            print_r(self::getTimestamp()." checksum success\n");
+                        } else {
                             die(self::getTimestamp()." checksum fail\n");
                         }
+
+                        // 打印增量数据
+                        call_user_func_array($GLOBALS['callback'], array($update));
 
                         // 更新全局的全量数据
                         $this->partial = $data;
