@@ -49,6 +49,11 @@ class FuturesApi extends Utils {
     const FUTURE_CANCEL_ALGOS = '/api/futures/v3/cancel_algos';
     const FUTURE_ALGO_LIST = '/api/futures/v3/order_algo';
 
+    // futures
+    const FUTURE_MARGIN_MODE = '/api/futures/v3/accounts/margin_mode';
+    const FUTURE_CLOSE_POSITION = '/api/futures/v3/close_position';
+    const FUTURE_CANCEL_ALL = '/api/futures/v3/cancel_all';
+
     // 获取合约账户所有的持仓信息
     public function getPosition()
     {
@@ -323,4 +328,37 @@ class FuturesApi extends Utils {
         return $this->request(self::FUTURE_ALGO_LIST."/$instrument_id", $params, 'GET', true);
     }
 
+
+    // 设置合约币种账户模式
+    public function setMarginMode($underlying,$margin_mode)
+    {
+        $params = [
+            'underlying'=> $underlying,
+            'margin_mode' => $margin_mode,
+        ];
+
+        return $this->request(self::FUTURE_MARGIN_MODE, $params, 'POST');
+    }
+
+    // 市价全平
+    public function closePosition($instrument_id,$direction)
+    {
+        $params = [
+            'instrument_id'=> $instrument_id,
+            'direction' => $direction,
+        ];
+
+        return $this->request(self::FUTURE_CLOSE_POSITION, $params, 'POST');
+    }
+
+    // 撤销所有平仓挂单
+    public function cancelAll($instrument_id,$direction)
+    {
+        $params = [
+            'instrument_id'=> $instrument_id,
+            'direction' => $direction,
+        ];
+
+        return $this->request(self::FUTURE_CANCEL_ALL, $params, 'POST');
+    }
 }
