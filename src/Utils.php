@@ -10,6 +10,7 @@ class Utils
 
     static $textToSign = '';
 
+//    const FUTURE_API_URL = 'https://okexbeta.bafang.com';
     const FUTURE_API_URL = 'https://www.okex.com';
     const SERVER_TIMESTAMP_URL = '/api/general/v3/time';
 
@@ -85,7 +86,7 @@ class Utils
                     echo ($info);
 
                     // 获得响应结果里的：头大小
-//                $headerSize = curl_getinfo($ch, CURLINFO_HEADER_SIZE);
+                $headerSize = curl_getinfo($ch, CURLINFO_HEADER_SIZE);
 //                // 根据头大小去获取头信息内容
 //                $header = substr($return, 0, $headerSize);
 

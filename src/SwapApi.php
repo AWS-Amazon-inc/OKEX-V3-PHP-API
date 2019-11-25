@@ -145,9 +145,9 @@ class SwapApi extends Utils {
     }
 
     // 获取订单列表
-    public function getOrderList($status, $instrument_id, $afters='', $before='', $limit='')
+    public function getOrderList($state, $instrument_id, $afters='', $before='', $limit='')
     {
-        $params = ['status' => $status];
+        $params = ['state' => $state];
 
         if ($afters) $params['after'] = $afters;
         if ($before) $params['before'] = $before;

@@ -27,6 +27,11 @@ class SpotApi extends Utils {
     const SPOT_DEAL = '/api/spot/v3/instruments/';
     const SPOT_KLINE = '/api/spot/v3/instruments/';
 
+    // spot order_algo
+    const SPOT_ORDER_ALGO = '/api/spot/v3/order_algo/';
+    const SPOT_CANCEL_BATCH_ALGOS = '/api/spot/v3/cancel_batch_algos/';
+    const SPOT_ALGO_LIST = '/api/spot/v3/algo';
+
     // 币币账户信息
     public function getAccountInfo()
     {

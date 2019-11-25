@@ -29,6 +29,8 @@ class Websocket extends Utils{
 
     public $checksumTest;
 
+    public $tradeVolumn=[];
+
     public function __construct($configs)
     {
         parent::__construct($configs);
@@ -42,7 +44,7 @@ class Websocket extends Utils{
         $worker = new Worker();
 
         // 线上
-        $url = "ws://real.okex.com:10442/ws/v3";
+        $url = "ws://real.okex.com:8443/ws/v3";
         // 预发
 //        $url = "ws://okexcomrealtest.bafang.com:10442/ws/v3";
         // 杭州
@@ -63,7 +65,7 @@ class Websocket extends Utils{
             Timer::add(20, function() use ($con)
             {
                 $con->send("ping");
-
+//
                 $ntime = $this->getTimestamp();
                 print_r($ntime." ping\n");
             });
