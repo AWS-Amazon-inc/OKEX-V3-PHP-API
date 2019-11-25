@@ -208,7 +208,7 @@ class SpotApi extends Utils {
 //        return $this->request(self::SPOT_ORDER, $params, 'POST');
 //    }
 
-    //撤销指定策略订单
+    //委托策略撤单
     public function revokeAlgoOrders($instrument_id, array $algo_ids, $order_type)
     {
         $params = [
@@ -220,7 +220,7 @@ class SpotApi extends Utils {
         return $this->request(self::SPOT_CANCEL_BATCH_ALGOS, $params, 'POST');
     }
 
-    // 获取订单列表
+    // 获取委托单列表
     public function getAlgoList($instrument_id, $order_type, $status='', $algo_id='', $after='', $before='', $limit='')
     {
         $params = [

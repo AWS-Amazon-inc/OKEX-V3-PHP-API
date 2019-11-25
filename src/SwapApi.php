@@ -46,6 +46,11 @@ class SwapApi extends Utils {
     const SWAP_FUNDING_TIME = '/api/swap/v3/instruments/';
     const SWAP_HISTORICAL_FUNDING_RATE = '/api/swap/v3/instruments/';
 
+    // swap order_algo
+    const SWAP_ORDER_ALGO = '/api/swap/v3/order_algo';
+    const SWAP_CANCEL_ALGOS = '/api/swap/v3/cancel_algos';
+    const SWAP_ALGO_LIST = '/api/swap/v3/order_algo';
+
 
     // 获取合约账户所有的持仓信息
     public function getPosition()
@@ -290,6 +295,49 @@ class SwapApi extends Utils {
     public function getHistoricalFundingRate($instrument_id)
     {
         return $this->request(self::SWAP_HISTORICAL_FUNDING_RATE.$instrument_id.'/historical_funding_rate', [], 'GET');
+    }
+
+    // 策略下单，止盈止损
+    public function takeAlgoOrderStop($instrument_id, $type, $order_type, $size, $trigger_price, $algo_price)
+    {
+        $params = [
+            'instrument_id' => $instrument_id,
+            'type' => $type,
+            'order_type' => $order_type,
+            'size' => $size,
+            'trigger_price' => $trigger_price,
+            'algo_price' => $algo_price
+        ];
+
+        return $this->request(self::SWAP_ORDER_ALGO, $params, 'POST');
+    }
+
+    //委托策略撤单
+    public function revokeAlgoOrders($instrument_id, array $algo_ids, $order_type)
+    {
+        $params = [
+            'instrument_id' => $instrument_id,
+            'algo_ids' => $algo_ids,
+            'order_type' => $order_type,
+        ];
+
+        return $this->request(self::SWAP_CANCEL_ALGOS, $params, 'POST');
+    }
+
+    // 获取委托单列表
+    public function getAlgoList($instrument_id, $order_type, $status='', $algo_id, $after='', $before='', $limit='')
+    {
+        $params = [
+            'order_type' => $order_type,
+        ];
+
+        if ($status) $params['status'] = $after;
+        if ($algo_id) $params['algo_id'] = $algo_id;
+        if ($after) $params['after'] = $after;
+        if ($before) $params['before'] = $before;
+        if ($limit) $params['limit'] = $limit;
+
+        return $this->request(self::SWAP_ALGO_LIST."/$instrument_id", $params, 'GET', true);
     }
 
 

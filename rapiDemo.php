@@ -85,7 +85,7 @@ $obj = new SpotApi(Config::$config);
 //$res = $obj -> getKine($instrumentId,3600);
 // 策略委托下单-止盈止损- mode为1是币币， mode为1是币币杠杆，
 //$res = $obj -> takeAlgoOrderStop($instrumentId,"1","1", "1", "buy", "1","1");
-// 策略委托撤单-止盈止损
+// 委托策略撤单-止盈止损
 //$res = $obj -> revokeAlgoOrders($instrumentId,["401671"], "1");
 // 获取委托单列表-止盈止损
 //$res = $obj -> getAlgoList($instrumentId, "1", '','401671','','','');
@@ -124,7 +124,7 @@ $obj = new MarginApi(Config::$config);
 
 
 // 交割合约-Ticker
-$instrumentId = "TRX-USD-191018";
+$instrumentId = "EOS-USD-191227";
 $coin = "EOS";
 $obj = new FuturesApi(Config::$config);
 // 合约持仓信息
@@ -180,10 +180,17 @@ $obj = new FuturesApi(Config::$config);
 // 公共-获取合约挂单冻结数量
 //$res = $obj->getHoldsAmount($instrumentId);
 
+// 策略委托下单-止盈止损- mode为1是币币， mode为1是币币杠杆，
+//$res = $obj -> takeAlgoOrderStop($instrumentId,"1","1", "1", "1", "1");
+// 委托策略撤单-止盈止损
+//$res = $obj -> revokeAlgoOrders($instrumentId,["3121188"], "1");
+// 获取委托单列表-止盈止损
+//$res = $obj -> getAlgoList($instrumentId, "1", '',"3121188",'','','');
+
 // 永续合约-Ticker
 $instrumentId = "EOS-USD-SWAP";
 $currency = "EOS";
-//$obj = new SwapApi(Config::$config);
+$obj = new SwapApi(Config::$config);
 // 合约持仓信息
 //$res = $obj->getPosition();
 // 单个合约持仓信息
@@ -240,6 +247,15 @@ $currency = "EOS";
 //$res = $obj->getMarkPrice($instrumentId);
 // 公共-获取合约历史资金费率
 //$res = $obj->getHistoricalFundingRate($instrumentId);
+
+// 策略委托下单-止盈止损- mode为1是币币， mode为1是币币杠杆，
+//$res = $obj -> takeAlgoOrderStop($instrumentId,"1","1", "1", "1", "1");
+// 委托策略撤单-止盈止损
+//$res = $obj -> revokeAlgoOrders($instrumentId,["375065465116119040"], "1");
+// 获取委托单列表-止盈止损
+$res = $obj -> getAlgoList($instrumentId, "1", '',"375065465116119040",'','','');
+
+
 //
 //echo ($res["holding"][0]["short_qty"]);
 //echo "\n";
