@@ -52,7 +52,7 @@ $coin = "XMR";
 /**
  * 币币
  */
-$instrumentId = "BTC-USDT";
+$instrumentId = "EOS-USDT";
 $currency = "EOS";
 $obj = new SpotApi(Config::$config);
 // 币币账户信息
@@ -78,11 +78,17 @@ $obj = new SpotApi(Config::$config);
 // 获取全部ticker信息
 //$res = $obj -> getTicker();
 // 获取某个ticker信息
-$res = $obj -> getSpecificTicker($instrumentId);
+//$res = $obj -> getSpecificTicker($instrumentId);
 // 获取成交数据
 //$res = $obj -> getDeal($instrumentId);
 // 获取K线
 //$res = $obj -> getKine($instrumentId,3600);
+// 策略委托下单-止盈止损- mode为1是币币， mode为1是币币杠杆，
+//$res = $obj -> takeAlgoOrderStop($instrumentId,"1","1", "1", "buy", "1","1");
+// 策略委托撤单-止盈止损
+//$res = $obj -> revokeAlgoOrders($instrumentId,["401671"], "1");
+// 获取委托单列表-止盈止损
+//$res = $obj -> getAlgoList($instrumentId, "1", '','401671','','','');
 
 // 币币杠杆账户信息
 $instrumentId = "EOS-USDT";
@@ -239,8 +245,4 @@ $currency = "EOS";
 //echo "\n";
 
 // 指数
-
 //$res = $obj->getHistoricalFundingRate($instrumentId);
-
-
-

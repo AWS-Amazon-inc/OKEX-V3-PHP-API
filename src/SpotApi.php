@@ -175,4 +175,65 @@ class SpotApi extends Utils {
         return $this->request(self::SPOT_KLINE.$instrument_id.'/candles',  $params, 'GET');
     }
 
+
+    // 策略下单，止盈止损
+    public function takeAlgoOrderStop($instrument_id, $mode, $order_type, $size, $side, $trigger_price, $algo_price)
+    {
+        $params = [
+            'instrument_id' => $instrument_id,
+            'mode' => $mode,
+            'order_type' => $order_type,
+            'size' => $size,
+            'side' => $side,
+            'trigger_price' => $trigger_price,
+            'algo_price' => $algo_price
+        ];
+
+        return $this->request(self::SPOT_ORDER_ALGO, $params, 'POST');
+    }
+
+//    // 策略下单，跟踪委托参数
+//    public function takeAlgoOrderFollow($instrument_id, $mode, $order_type, $size, $side, $callback_rate, $trigger_price)
+//    {
+//        $params = [
+//            'instrument_id' => $instrument_id,
+//            'mode' => $mode,
+//            'order_type' => $order_type,
+//            'size' => $size,
+//            'side' => $side,
+//            'callback_rate' => $callback_rate,
+//            'trigger_price' => $trigger_price
+//        ];
+//
+//        return $this->request(self::SPOT_ORDER, $params, 'POST');
+//    }
+
+    //撤销指定策略订单
+    public function revokeAlgoOrders($instrument_id, array $algo_ids, $order_type)
+    {
+        $params = [
+            'instrument_id' => $instrument_id,
+            'algo_ids' => $algo_ids,
+            'order_type' => $order_type,
+        ];
+
+        return $this->request(self::SPOT_CANCEL_BATCH_ALGOS, $params, 'POST');
+    }
+
+    // 获取订单列表
+    public function getAlgoList($instrument_id, $order_type, $status='', $algo_id='', $after='', $before='', $limit='')
+    {
+        $params = [
+            'instrument_id' => $instrument_id,
+            'order_type' => $order_type,
+        ];
+
+        if ($status) $params['status'] = $after;
+        if ($algo_id) $params['algo_id'] = $algo_id;
+        if ($after) $params['after'] = $after;
+        if ($before) $params['before'] = $before;
+        if ($limit) $params['limit'] = $limit;
+
+        return $this->request(self::SPOT_ALGO_LIST, $params, 'GET', true);
+    }
 }
