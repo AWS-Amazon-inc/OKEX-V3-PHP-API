@@ -135,6 +135,7 @@ class Utils
     // 获取IOS格式时间戳
     public static function getTimestamp()
     {
+        ini_set("date.timezone","UTC");
         return date("Y-m-d\TH:i:s"). substr((string)microtime(), 1, 4) . 'Z';
     }
 

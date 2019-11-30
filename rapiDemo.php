@@ -39,7 +39,7 @@ $coin = "XMR";
 // 查询所有币种的提币记录
 //$res = $obj -> getWithdrawalHistory();
 // 查询单个币种的提币记录
-//$res = $obj -> getCoinWithdrawalHistory($coin);
+$res = $obj -> getCoinWithdrawalHistory($coin);
 // 获取所有币种的充值记录
 //$res = $obj -> getDepositHistory();
 // 查询单个币种的充值记录
@@ -187,7 +187,7 @@ $obj = new FuturesApi(Config::$config);
 // 获取委托单列表-止盈止损
 //$res = $obj -> getAlgoList($instrumentId, "1", '',"3121188",'','','');
 
-$res = $obj -> setMarginMode($coin, "crossed");
+//$res = $obj -> setMarginMode($coin, "crossed");
 //$res = $obj -> closePosition($instrumentId, "long");
 //$res = $obj -> cancelAll($instrumentId, "long");
 
