@@ -110,15 +110,15 @@ $instrumentId = "XMR-ETH";
 $instrumentId = "EOS-BTC";
 $coin = "EOS";
 //$obj->subscribe($callbackTime,"spot/ticker:$instrumentId");
-//$obj->subscribe($callback,"spot/candle60s:*");
+//$obj->subscribe($callback,"spot/candle60s:$instrumentId");
 //$obj->subscribe($callbackTime,"spot/depth:$instrumentId");
 //$obj->subscribe($callbackTime,"spot/depth5:$instrumentId");
 //$obj->subscribe($callbackTime,"spot/trade:$instrumentId");
 //$obj->subscribe($callback);
-//$obj->subscribe($callbackTime,"spot/order:*");
-$obj->subscribe($callback,"spot/account:*");
+//$obj->subscribe($callbackTime,"spot/order:$instrumentId");
+$obj->subscribe($callback,"spot/account:$coin");
 
-//$obj->subscribe($callback,["spot/order:*","futures/order:*","swap/order:*"]);
+//$obj->subscribe($callback,["spot/order:$instrumentId","futures/order:$instrumentId","swap/order:$instrumentId"]);
 
 /**
  * margin
