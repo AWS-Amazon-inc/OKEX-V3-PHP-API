@@ -187,9 +187,9 @@ $obj = new FuturesApi(Config::$config);
 // 获取委托单列表-止盈止损
 //$res = $obj -> getAlgoList($instrumentId, "1", '',"3121188",'','','');
 
-//$res = $obj -> setMarginMode($coin, "crossed");
+$res = $obj -> setMarginMode($coin, "crossed");
 //$res = $obj -> closePosition($instrumentId, "long");
-$res = $obj -> cancelAll($instrumentId, "long");
+//$res = $obj -> cancelAll($instrumentId, "long");
 
 
 // 永续合约-Ticker
