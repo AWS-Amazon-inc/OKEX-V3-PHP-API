@@ -19,11 +19,11 @@
 
 第三步：调用Rest，在项目根目录下，运行如下命令
     
-    3.1 调用Rest公共接口，如永续合约的Ticker
+    3.1 调用Rest公共接口
         
         php rapiDemo.php
         
-    3.2 调用websocket, 如永续合约的Ticker
+    3.2 调用websocket
     
         php wsDemo.php start
      
