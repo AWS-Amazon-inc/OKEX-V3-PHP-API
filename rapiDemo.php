@@ -259,6 +259,7 @@ $obj = new SwapApi(Config::$config);
 //$res = $obj -> revokeAlgoOrders($instrumentId,["375065465116119040"], "1");
 // 获取委托单列表-止盈止损
 //$res = $obj -> getAlgoList($instrumentId, "1", '',"375065465116119040",'','','');
+$res = $obj -> getTradeFee();
 
 // 指数
 //$res = $obj->getHistoricalFundingRate($instrumentId);

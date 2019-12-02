@@ -50,6 +50,7 @@ class SwapApi extends Utils {
     const SWAP_ORDER_ALGO = '/api/swap/v3/order_algo';
     const SWAP_CANCEL_ALGOS = '/api/swap/v3/cancel_algos';
     const SWAP_ALGO_LIST = '/api/swap/v3/order_algo';
+    const SWAP_TRADE_FEE = '/api/swap/v3/trade_fee';
 
 
     // 获取合约账户所有的持仓信息
@@ -338,6 +339,12 @@ class SwapApi extends Utils {
         if ($limit) $params['limit'] = $limit;
 
         return $this->request(self::SWAP_ALGO_LIST."/$instrument_id", $params, 'GET', true);
+    }
+
+    // 获取委托单列表
+    public function getTradeFee()
+    {
+        return $this->request(self::SWAP_TRADE_FEE, '', 'GET', true);
     }
 
 
