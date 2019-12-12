@@ -1,12 +1,8 @@
 如何使用？
 
 第一步：下载代码
-
-    1.1 下载代码：
-    
-        git clone https://github.com/BigXia/OKEX-V3-PHP-API.git
-    
-    2.2 安装依赖composer包
+   
+    1.1 安装依赖composer包
     
         composer update
     
