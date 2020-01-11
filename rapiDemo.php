@@ -53,7 +53,7 @@ $coin = "XMR";
 /**
  * 币币
  */
-$instrumentId = "EOS-USDT";
+$instrumentId = "EOS-USDT{}";
 $currency = "EOS";
 $obj = new SpotApi(Config::$config);
 // 币币账户信息
@@ -71,7 +71,7 @@ $obj = new SpotApi(Config::$config);
 // 获取订单信息
 //$res = $obj -> getOrderInfo($instrumentId,"3271189018971137");
 // 获取成交明细
-//$res = $obj -> getFills($instrumentId,"3230072570268672");
+$res = $obj -> getFills($instrumentId,"3230072570268672");
 // 获取币对信息
 //$res = $obj -> getCoinInfo();
 // 获取深度数据
@@ -302,7 +302,7 @@ $obj = new OptionsApi(Config::$config);
 // 公共-获取成交数据
 //$res = $obj->getTrades($instrumentId);
 // 公共-获取某个ticker信息
-$res = $obj->getSpecificTicker($instrumentId);
+//$res = $obj->getSpecificTicker($instrumentId);
 // 公共-获取K线数据
 //$res = $obj->getKline($instrumentId,"60");
 

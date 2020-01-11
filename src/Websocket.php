@@ -45,11 +45,6 @@ class Websocket extends Utils{
 
         // 线上
         $url = "ws://real.okex.com:8443/ws/v3";
-        // 预发
-//        $url = "ws://okexcomrealtest.bafang.com:10442/ws/v3";
-        // 杭州
-//        $url = "ws://okexcomreal.bafang.com:10442/ws/v3";
-
 
         $worker->onWorkerStart = function($worker) use ($url){
             // ssl需要访问443端口

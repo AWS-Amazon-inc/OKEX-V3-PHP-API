@@ -10,7 +10,6 @@ class Utils
 
     static $textToSign = '';
 
-//    const FUTURE_API_URL = 'https://okexbeta.bafang.com';
     const FUTURE_API_URL = 'https://www.okex.com';
     const SERVER_TIMESTAMP_URL = '/api/general/v3/time';
 

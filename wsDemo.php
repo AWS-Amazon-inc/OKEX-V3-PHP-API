@@ -109,7 +109,7 @@ $instrumentId = "TRIO-USDT";
 $instrumentId = "XMR-ETH";
 $instrumentId = "BTC-USDT";
 $coin = "EOS";
-$obj->subscribe($callbackTime,"spot/ticker:$instrumentId");
+//$obj->subscribe($callbackTime,"spot/ticker:$instrumentId");
 //$obj->subscribe($callback,"spot/candle60s:$instrumentId");
 //$obj->subscribe($callbackTime,"spot/depth:$instrumentId");
 //$obj->subscribe($callbackTime,"spot/depth5:$instrumentId");
@@ -194,8 +194,9 @@ $coin = "EOS";
  * option
  */
 $instrumentId= "BTC-USD-191227-12500-C";
+$underlying = "TBTC-USD";
 $coin = "BTC";
-//$obj->subscribe($callbackTime,"option/instruments:$instrumentId");
+//$obj->subscribe($callbackTime,"option/instruments:$underlying");
 //$obj->subscribe($callback,"option/candle60s:$instrumentId");
 //$obj->subscribe($callback,"option/summary:$instrumentId");      // 期权详细定价频道
 //$obj->subscribe($callbackTime,"option/trade:$instrumentId");
