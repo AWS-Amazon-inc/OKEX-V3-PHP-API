@@ -53,7 +53,7 @@ $coin = "XMR";
 /**
  * 币币
  */
-$instrumentId = "EOS-USDT{}";
+$instrumentId = "EOS-USDT";
 $currency = "EOS";
 $obj = new SpotApi(Config::$config);
 // 币币账户信息
