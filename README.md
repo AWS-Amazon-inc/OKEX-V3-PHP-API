@@ -1,7 +1,7 @@
 环境要求：
 php版本：7.2及以上   
 composer：需要进行安装，后续进行依赖包的更新  
-系统要求：Windows、Linux和Mac
+系统要求：Windows、Linux或者Mac
 
 第一步：进入到项目根目录，安装依赖
    
